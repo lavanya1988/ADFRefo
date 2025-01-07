@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "vishdatafactory0706"
+		},
+		"AzureSqlDatabase1_password": {
+			"value": ""
+		},
+		"Linkservicegen2_accountKey": {
+			"value": ""
+		},
+		"Oracle1_connectionString": {
+			"value": ""
+		},
+		"lavanyastorage_linkedservice_connectionString": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "sqlserver0214.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "sqlserver2"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"value": "lavanya0214"
+		},
+		"Linkservicegen2_properties_typeProperties_url": {
+			"value": "https://azuretraining0213.dfs.core.windows.net/"
+		}
+	}
+}
