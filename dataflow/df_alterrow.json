@@ -1,0 +1,90 @@
+{
+	"name": "df_alterrow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "src_departments",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "src_department",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "lookup1"
+				},
+				{
+					"name": "alterRow1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          DEPARTMENT_ID as short,",
+				"          DEPARTMENT_NAME as string,",
+				"          MANAGER_ID as short,",
+				"          LOCATION_ID as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source(output(",
+				"          DEPARTMENT_ID as short,",
+				"          DEPARTMENT_NAME as string,",
+				"          MANAGER_ID as short,",
+				"          LOCATION_ID as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source2",
+				"source1, source2 lookup(source1@DEPARTMENT_ID == source2@DEPARTMENT_ID,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1",
+				"lookup1 alterRow(updateIf(iif(source1@DEPARTMENT_NAME!=source2@DEPARTMENT_NAME,true(),false()))) ~> alterRow1",
+				"alterRow1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:true,",
+				"     upsertable:false,",
+				"     keys:['DEPARTMENT_ID'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          DEPARTMENT_ID = source1@DEPARTMENT_ID,",
+				"          DEPARTMENT_NAME = source1@DEPARTMENT_NAME,",
+				"          MANAGER_ID = source1@MANAGER_ID,",
+				"          LOCATION_ID = source1@LOCATION_ID,",
+				"          DEPARTMENT_ID = source2@DEPARTMENT_ID,",
+				"          DEPARTMENT_NAME = source2@DEPARTMENT_NAME,",
+				"          MANAGER_ID = source2@MANAGER_ID,",
+				"          LOCATION_ID = source2@LOCATION_ID",
+				"     ),",
+				"     partitionBy('hash', 1),",
+				"     preCommands: [],",
+				"     postCommands: []) ~> sink1"
+			]
+		}
+	}
+}

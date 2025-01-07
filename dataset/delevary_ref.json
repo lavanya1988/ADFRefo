@@ -1,0 +1,36 @@
+{
+	"name": "delevary_ref",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Delivery_Type_Ref_key",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Delivery_Type_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Delivery_Type",
+				"type": "varchar"
+			},
+			{
+				"name": "STG_CREATE_DATE",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "hr",
+			"table": "DELIVERY_TYPE_REF"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

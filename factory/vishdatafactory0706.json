@@ -1,0 +1,9 @@
+{
+	"name": "vishdatafactory0706",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "55ef55ba-338e-4cea-b9b1-69bb18d5e3e1",
+		"tenantId": "46cc67cd-32bd-4837-91e3-ffd8c03dbcb0"
+	}
+}

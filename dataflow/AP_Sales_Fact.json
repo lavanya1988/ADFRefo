@@ -1,0 +1,326 @@
+{
+	"name": "AP_Sales_Fact",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "stg_orders",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "stg_order_line",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable2",
+						"type": "DatasetReference"
+					},
+					"name": "source3"
+				},
+				{
+					"dataset": {
+						"referenceName": "delevary_ref",
+						"type": "DatasetReference"
+					},
+					"name": "source4"
+				},
+				{
+					"dataset": {
+						"referenceName": "payment_ref",
+						"type": "DatasetReference"
+					},
+					"name": "source5"
+				},
+				{
+					"dataset": {
+						"referenceName": "stg_channel",
+						"type": "DatasetReference"
+					},
+					"name": "source6"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable6",
+						"type": "DatasetReference"
+					},
+					"name": "source7"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable3",
+						"type": "DatasetReference"
+					},
+					"name": "source8"
+				},
+				{
+					"dataset": {
+						"referenceName": "stg_product",
+						"type": "DatasetReference"
+					},
+					"name": "source9"
+				},
+				{
+					"dataset": {
+						"referenceName": "stg_promotions",
+						"type": "DatasetReference"
+					},
+					"name": "source10"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "sales_fact",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "join1"
+				},
+				{
+					"name": "join2"
+				},
+				{
+					"name": "join3"
+				},
+				{
+					"name": "join4"
+				},
+				{
+					"name": "join5"
+				},
+				{
+					"name": "join6"
+				},
+				{
+					"name": "join7"
+				},
+				{
+					"name": "join8"
+				},
+				{
+					"name": "join9"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          ORDER_ID as integer,",
+				"          ORDER_DATE as string,",
+				"          ORDER_STATUS as string,",
+				"          TOTAL_AMOUNT as double,",
+				"          TAX as double,",
+				"          TIPS as double,",
+				"          TOTAL_QUANTITY as short,",
+				"          DELIVERY_ID as short,",
+				"          CHANNEL_ID as short,",
+				"          STORE_LOCATION_ID as short,",
+				"          CUSTOMER_ID as short,",
+				"          PAYMENT_ID as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source(output(",
+				"          ORDER_LINE_ID as integer,",
+				"          UNIT_PRICE as double,",
+				"          QUANTITY as short,",
+				"          PROMOTION_AMOUNT as double,",
+				"          PROMOTION_ID as short,",
+				"          ORDER_ID as integer,",
+				"          PRODUCT_ID as short,",
+				"          PRODUCT_TOPPING_ID as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source2",
+				"source(output(",
+				"          CUSTOMER_DIM_KEY as long,",
+				"          CUSTOMER_ID as short,",
+				"          CUSTOMER_FIRST_NAME as string,",
+				"          CUSTOMER_LAST_NAME as string,",
+				"          IS_LOYAL as string,",
+				"          R_Address_Lane1 as string,",
+				"          R_Address_Lane_2 as string,",
+				"          R_City_Name as string,",
+				"          R_State_Name as string,",
+				"          R_Country_Name as string,",
+				"          R_Zip_Code as integer,",
+				"          R_Gate_Code as integer,",
+				"          O_Address_Lane1 as string,",
+				"          O_Address_Lane_2 as string,",
+				"          O_City_Name as string,",
+				"          O_State_Name as string,",
+				"          O_Country_Name as string,",
+				"          O_Zip_Code as integer,",
+				"          O_Gate_Code as integer,",
+				"          FIRST__PHONE_NUMBER as string,",
+				"          SECOND_PHONE_NUMBER as string,",
+				"          CUSTOMER_EMAIL1 as string,",
+				"          CUSTOMER_EMAIL2 as string,",
+				"          JOINING_DATE as string,",
+				"          STG_CREATE_DATE as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source3",
+				"source(output(",
+				"          Delivery_Type_Ref_key as integer,",
+				"          Delivery_Type_ID as integer,",
+				"          Delivery_Type as string,",
+				"          STG_CREATE_DATE as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source4",
+				"source(output(",
+				"          Payment_Ref_Key as integer,",
+				"          Payment_ID as integer,",
+				"          Payment_Type as string,",
+				"          STG_CREATE_DATE as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source5",
+				"source(output(",
+				"          CHANNEL_ID as short,",
+				"          CHANNEL_TYPE as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source6",
+				"source(output(",
+				"          Surr_Product_kEY as integer,",
+				"          Product_ID as integer,",
+				"          Product_Name as string,",
+				"          Product_Price as decimal(5,2),",
+				"          Is_Active as string,",
+				"          PRODUCT_CATEGORY_ID as string,",
+				"          Product_Category_Name as string,",
+				"          Product_SubCategory_ID as integer,",
+				"          Product_SubCategory_Name as string,",
+				"          Product_Size as string,",
+				"          Product_Description as string,",
+				"          Eff_Start_Date as date,",
+				"          Eff_End_Date as date,",
+				"          DM_CREATE_DATE as date,",
+				"          Flag as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source7",
+				"source(output(",
+				"          Location_Dim_Key as long,",
+				"          STORE_LOCATION_ID as short,",
+				"          STORE_NAME as string,",
+				"          STORE_ADDRESS as string,",
+				"          STORE_PHONE_NUMBER as string,",
+				"          STORE_OPEN_TIME as string,",
+				"          STORE_CLOSE_TIME as string,",
+				"          STATE_NAME as string,",
+				"          STATE_COUNTRY as string,",
+				"          { DM_CREATE_DATE} as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source8",
+				"source(output(",
+				"          PRODUCT_ID as short,",
+				"          PRODUCT_NAME as string,",
+				"          PRODUCT_PRICE as string,",
+				"          PRODUCT_DESCRIPTION as string,",
+				"          CALORIES as short,",
+				"          IS_ACTIVE as string,",
+				"          PRODUCT_SUBCATEGORY_ID as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source9",
+				"source(output(",
+				"          PROMOTION_ID as short,",
+				"          PROMOTION_NAME as string,",
+				"          PROMOTION_TYPE as string,",
+				"          DISCOUNT_AMOUNT as string,",
+				"          START_DATE as string,",
+				"          END_DATE as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source10",
+				"source1, source2 join(source1@ORDER_ID == source2@ORDER_ID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1, source3 join(source1@CUSTOMER_ID == source3@CUSTOMER_ID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join2",
+				"join2, source4 join(DELIVERY_ID == Delivery_Type_ID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join3",
+				"join3, source5 join(source1@PAYMENT_ID == source5@Payment_ID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join4",
+				"join4, source6 join(source1@CHANNEL_ID == source6@CHANNEL_ID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join5",
+				"join5, source7 join(source2@PRODUCT_ID == source7@Product_ID,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join6",
+				"join6, source8 join(source1@STORE_LOCATION_ID == source8@STORE_LOCATION_ID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join7",
+				"join7, source9 join(source2@PRODUCT_ID == source9@PRODUCT_ID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join8",
+				"join8, source10 join(source2@PROMOTION_ID == source10@PROMOTION_ID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join9",
+				"join9 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          emp_id as string,",
+				"          name as string",
+				"     ),",
+				"     partitionFileNames:['sales_fact.csv'],",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1"
+			]
+		}
+	}
+}

@@ -1,0 +1,70 @@
+{
+	"name": "prod_table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "product_dim_key",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "PRODUCT_ID",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "PRODUCT_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PRODUCT_PRICE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PRODUCT_DESCRIPTION",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IS_ACTIVE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PRODUCT_SUBCATEGORY_ID",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "PRODUCT_SUBCATEGORY_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PRODUCT_SIZE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PRODUCT_CATEGORY_ID",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "PRODUCT_CATEGORY_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CREATE_DATE",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "hr",
+			"table": "product"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

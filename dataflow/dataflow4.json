@@ -1,0 +1,165 @@
+{
+	"name": "dataflow4",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "promo_dim1",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "promo_dim1",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "promo_dim1",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "filter2"
+				},
+				{
+					"name": "alterRow1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          SRC_PROMOTION_ID as short,",
+				"          SRC_PROMOTION_NAME as string,",
+				"          SRC_PROMOTION_TYPE as string,",
+				"          SRC_DISCOUNT as string,",
+				"          SRC_START_DATE as string,",
+				"          SRC_END_DATE as string,",
+				"          TGT_PROMOTION_DIM_KEY as integer,",
+				"          TGT_PROMOTION_ID as integer,",
+				"          TGT_PROMOTION_NAME as string,",
+				"          TGT_PREV_PROMOTION_NAME as string,",
+				"          TGT_PROMOTION_TYPE as string,",
+				"          TGT_PREV_PROMOTION_TYPE as string,",
+				"          TGT_DISCOUNT_AMOUNT as decimal(5,2),",
+				"          TGT_PREV_DISCOUNT_AMOUNT as decimal(5,2),",
+				"          TGT_START_DATE as date,",
+				"          TGT_PREV_START_DATE as date,",
+				"          TGT_END_DATE as date,",
+				"          TGT_PREV_END_DATE as date,",
+				"          TGT_STG_CREATE_DATE as date,",
+				"          FLAG_INSERT as string,",
+				"          FLAG_UPDATE as string,",
+				"          PROMOTION_NAME1 as string,",
+				"          PROMOTION_TYPE1 as string,",
+				"          DISCOUNT_AMOUNT1 as decimal(5,2),",
+				"          START_DATE1 as date,",
+				"          END_DATE1 as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     query: 'SELECT A.PROMOTION_ID as SRC_PROMOTION_ID, \\nA.PROMOTION_NAME as SRC_PROMOTION_NAME,\\nA.PROMOTION_TYPE as SRC_PROMOTION_TYPE,\\nA.DISCOUNT_AMOUNT as SRC_DISCOUNT,\\nA.START_DATE as SRC_START_DATE,\\nA.END_DATE as SRC_END_DATE,\\nB.PROMOTION_DIM_KEY as TGT_PROMOTION_DIM_KEY,\\nB.PROMOTION_ID AS TGT_PROMOTION_ID,\\nB.PROMOTION_NAME as TGT_PROMOTION_NAME,\\nB.PREVIOUS_PROMOTION_NAME as TGT_PREV_PROMOTION_NAME,\\nB.PROMOTION_TYPE as TGT_PROMOTION_TYPE,\\nB.PREVIOUS_PROMOTION_TYPE as TGT_PREV_PROMOTION_TYPE,\\nB.DISCOUNT_AMOUNT as TGT_DISCOUNT_AMOUNT,\\nB.PREVIOUS_DISCOUNT_AMOUNT as TGT_PREV_DISCOUNT_AMOUNT,\\nB.START_DATE as TGT_START_DATE,\\nB.PREVIOUS_START_DATE as TGT_PREV_START_DATE,\\nB.END_DATE as TGT_END_DATE,\\nB.PREVIOUS_END_DATE as TGT_PREV_END_DATE,\\nB.STG_CREATE_DATE as TGT_STG_CREATE_DATE,\\nCASE WHEN B.PROMOTION_ID is null THEN \\'I\\' ELSE \\'N\\' END FLAG_INSERT,\\nCASE WHEN B.PROMOTION_ID is not null AND (A.PROMOTION_NAME <> B.PROMOTION_NAME) OR \\n(A.PROMOTION_TYPE<>B.PROMOTION_TYPE) OR \\n(A.DISCOUNT_AMOUNT<>CONVERT(VARCHAR(10),CONVERT(INT, B.DISCOUNT_AMOUNT))) OR \\n(A.START_DATE<>B.START_DATE) OR \\n( A.END_DATE <> B.END_DATE)\\nTHEN \\'U\\' ELSE \\'N\\' END FLAG_UPDATE,\\nCASE WHEN A.PROMOTION_NAME <> B.PROMOTION_NAME THEN B.PROMOTION_NAME ELSE \\'\\' END PROMOTION_NAME1,\\nCASE WHEN A.PROMOTION_TYPE <> B.PROMOTION_TYPE THEN B.PROMOTION_TYPE ELSE \\'\\' END PROMOTION_TYPE1,\\nCASE WHEN A.DISCOUNT_AMOUNT<> CONVERT(VARCHAR(10),CONVERT(INT, B.DISCOUNT_AMOUNT)) THEN CONVERT(VARCHAR(10),CONVERT(INT, B.DISCOUNT_AMOUNT)) ELSE \\'\\' END DISCOUNT_AMOUNT1,\\nCASE WHEN A.START_DATE <> B.START_DATE THEN B.START_DATE ELSE \\'\\' END START_DATE1,\\nCASE WHEN A.END_DATE <> B.END_DATE THEN B.END_DATE ELSE \\'\\' END  END_DATE1\\nFROM HR.PROMOTIONS A\\nLEFT JOIN HR.PROMOTION_DIM1 B\\nON A.PROMOTION_ID = B.PROMOTION_ID\\nWHERE A.PROMOTION_ID IS NOT NULL',",
+				"     format: 'query') ~> source2",
+				"source2 filter(FLAG_UPDATE=='U') ~> filter1",
+				"source2 filter(FLAG_INSERT=='I') ~> filter2",
+				"derivedColumn2 alterRow(updateIf(1==1)) ~> alterRow1",
+				"filter2 derive(STG_CREATE_DATE = currentDate()) ~> derivedColumn1",
+				"filter1 derive(STG_CREATE_DATE = currentDate()) ~> derivedColumn2",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          PROMOTION_DIM_KEY as integer,",
+				"          PROMOTION_ID as integer,",
+				"          PROMOTION_NAME as string,",
+				"          PREVIOUS_PROMOTION_NAME as string,",
+				"          PROMOTION_TYPE as string,",
+				"          PREVIOUS_PROMOTION_TYPE as string,",
+				"          DISCOUNT_AMOUNT as decimal(5,2),",
+				"          PREVIOUS_DISCOUNT_AMOUNT as decimal(5,2),",
+				"          START_DATE as date,",
+				"          PREVIOUS_START_DATE as date,",
+				"          END_DATE as date,",
+				"          PREVIOUS_END_DATE as date,",
+				"          STG_CREATE_DATE as date",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          PROMOTION_ID = SRC_PROMOTION_ID,",
+				"          PROMOTION_NAME = SRC_PROMOTION_NAME,",
+				"          PROMOTION_TYPE = SRC_PROMOTION_TYPE,",
+				"          DISCOUNT_AMOUNT = SRC_DISCOUNT,",
+				"          START_DATE = SRC_START_DATE,",
+				"          END_DATE = SRC_END_DATE,",
+				"          STG_CREATE_DATE",
+				"     )) ~> sink1",
+				"alterRow1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          PROMOTION_DIM_KEY as integer,",
+				"          PROMOTION_ID as integer,",
+				"          PROMOTION_NAME as string,",
+				"          PREVIOUS_PROMOTION_NAME as string,",
+				"          PROMOTION_TYPE as string,",
+				"          PREVIOUS_PROMOTION_TYPE as string,",
+				"          DISCOUNT_AMOUNT as decimal(5,2),",
+				"          PREVIOUS_DISCOUNT_AMOUNT as decimal(5,2),",
+				"          START_DATE as date,",
+				"          PREVIOUS_START_DATE as date,",
+				"          END_DATE as date,",
+				"          PREVIOUS_END_DATE as date,",
+				"          STG_CREATE_DATE as date",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:true,",
+				"     upsertable:false,",
+				"     keys:['PROMOTION_DIM_KEY'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          PROMOTION_DIM_KEY = TGT_PROMOTION_DIM_KEY,",
+				"          PROMOTION_ID = SRC_PROMOTION_ID,",
+				"          PROMOTION_NAME = SRC_PROMOTION_NAME,",
+				"          PREVIOUS_PROMOTION_NAME = PROMOTION_NAME1,",
+				"          PROMOTION_TYPE = SRC_PROMOTION_TYPE,",
+				"          PREVIOUS_PROMOTION_TYPE = PROMOTION_TYPE1,",
+				"          DISCOUNT_AMOUNT = SRC_DISCOUNT,",
+				"          PREVIOUS_DISCOUNT_AMOUNT = DISCOUNT_AMOUNT1,",
+				"          START_DATE = SRC_START_DATE,",
+				"          PREVIOUS_START_DATE = START_DATE1,",
+				"          END_DATE = SRC_END_DATE,",
+				"          PREVIOUS_END_DATE = END_DATE1,",
+				"          STG_CREATE_DATE",
+				"     )) ~> sink2"
+			]
+		}
+	}
+}

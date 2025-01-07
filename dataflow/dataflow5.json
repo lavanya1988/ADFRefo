@@ -1,0 +1,200 @@
+{
+	"name": "dataflow5",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "stg_promotions",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "promo_dim2",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "promo_dim2",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "promo_dim2",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				},
+				{
+					"dataset": {
+						"referenceName": "promo_dim2",
+						"type": "DatasetReference"
+					},
+					"name": "sink3"
+				}
+			],
+			"transformations": [
+				{
+					"name": "lookup1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "split1"
+				},
+				{
+					"name": "alterRow1"
+				},
+				{
+					"name": "alterRow2"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          PROMOTION_ID as short,",
+				"          PROMOTION_NAME as string,",
+				"          PROMOTION_TYPE as string,",
+				"          DISCOUNT_AMOUNT as string,",
+				"          START_DATE as string,",
+				"          END_DATE as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source(output(",
+				"          PROMOTION_DIM_KEY as integer,",
+				"          PROMOTION_ID as integer,",
+				"          PROMOTION_NAME as string,",
+				"          PREVIOUS_PROMOTION_NAME as string,",
+				"          PROMOTION_TYPE as string,",
+				"          PREVIOUS_PROMOTION_TYPE as string,",
+				"          STG_CREATE_DATE as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source2",
+				"source1, source2 lookup(source1@PROMOTION_ID == source2@PROMOTION_ID,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1",
+				"lookup1 derive(STG_CREATE_DATE = currentDate()) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          PROMOTION_ID = source1@PROMOTION_ID,",
+				"          PROMOTION_NAME = source1@PROMOTION_NAME,",
+				"          PROMOTION_TYPE = source1@PROMOTION_TYPE,",
+				"          DISCOUNT_AMOUNT,",
+				"          START_DATE,",
+				"          END_DATE,",
+				"          PROMOTION_DIM_KEY,",
+				"          tgt_PROMOTION_ID = source2@PROMOTION_ID,",
+				"          tgt_PROMOTION_NAME = source2@PROMOTION_NAME,",
+				"          tgt_PREVIOUS_PROMOTION_NAME = PREVIOUS_PROMOTION_NAME,",
+				"          tgt_PROMOTION_TYPE = source2@PROMOTION_TYPE,",
+				"          tgt_PREVIOUS_PROMOTION_TYPE = PREVIOUS_PROMOTION_TYPE,",
+				"          STG_CREATE_DATE",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 split(isNull(tgt_PROMOTION_ID),",
+				"     PROMOTION_NAME!=tgt_PROMOTION_NAME,",
+				"     PROMOTION_TYPE != tgt_PROMOTION_TYPE,",
+				"     disjoint: false) ~> split1@(Insert, update, update1)",
+				"split1@update alterRow(updateIf(1==1)) ~> alterRow1",
+				"split1@update1 alterRow(updateIf(1==1)) ~> alterRow2",
+				"split1@Insert sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          PROMOTION_DIM_KEY as integer,",
+				"          PROMOTION_ID as integer,",
+				"          PROMOTION_NAME as string,",
+				"          PREVIOUS_PROMOTION_NAME as string,",
+				"          PROMOTION_TYPE as string,",
+				"          PREVIOUS_PROMOTION_TYPE as string,",
+				"          STG_CREATE_DATE as date",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          PROMOTION_ID,",
+				"          PROMOTION_NAME,",
+				"          PROMOTION_TYPE,",
+				"          STG_CREATE_DATE",
+				"     )) ~> sink1",
+				"alterRow1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          PROMOTION_DIM_KEY as integer,",
+				"          PROMOTION_ID as integer,",
+				"          PROMOTION_NAME as string,",
+				"          PREVIOUS_PROMOTION_NAME as string,",
+				"          PROMOTION_TYPE as string,",
+				"          PREVIOUS_PROMOTION_TYPE as string,",
+				"          STG_CREATE_DATE as date",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:true,",
+				"     upsertable:false,",
+				"     keys:['PROMOTION_DIM_KEY'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          PROMOTION_DIM_KEY,",
+				"          PROMOTION_ID,",
+				"          PROMOTION_NAME,",
+				"          PREVIOUS_PROMOTION_NAME = tgt_PROMOTION_NAME,",
+				"          STG_CREATE_DATE",
+				"     )) ~> sink2",
+				"alterRow2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          PROMOTION_DIM_KEY as integer,",
+				"          PROMOTION_ID as integer,",
+				"          PROMOTION_NAME as string,",
+				"          PREVIOUS_PROMOTION_NAME as string,",
+				"          PROMOTION_TYPE as string,",
+				"          PREVIOUS_PROMOTION_TYPE as string,",
+				"          STG_CREATE_DATE as date",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:true,",
+				"     upsertable:false,",
+				"     keys:['PROMOTION_DIM_KEY'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          PROMOTION_DIM_KEY,",
+				"          PROMOTION_ID,",
+				"          PROMOTION_TYPE,",
+				"          PREVIOUS_PROMOTION_TYPE = tgt_PROMOTION_TYPE,",
+				"          STG_CREATE_DATE",
+				"     )) ~> sink3"
+			]
+		}
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"name": "stg_promotion_tbl",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "hr",
+			"table": "promotions"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

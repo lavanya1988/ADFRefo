@@ -1,0 +1,54 @@
+{
+	"name": "stg_location",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Linkservicegen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "STG_STORE_LOCATION.csv",
+				"folderPath": "target/AzureProject/stg",
+				"fileSystem": "data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "STORE_LOCATION_ID",
+				"type": "String"
+			},
+			{
+				"name": "STORE_NAME",
+				"type": "String"
+			},
+			{
+				"name": "STORE_ADDRESS",
+				"type": "String"
+			},
+			{
+				"name": "STORE_PHONE_NUMBER",
+				"type": "String"
+			},
+			{
+				"name": "STORE_OPEN_TIME",
+				"type": "String"
+			},
+			{
+				"name": "STORE_CLOSE_TIME",
+				"type": "String"
+			},
+			{
+				"name": "STATE_COUNTRY_ID",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

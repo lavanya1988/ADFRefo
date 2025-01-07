@@ -1,0 +1,43 @@
+{
+	"name": "promotions_table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "PROMOTION_ID",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "PROMOTION_NAME",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PROMOTION_TYPE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DISCOUNT_AMOUNT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "START_DATE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "END_DATE",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "hr",
+			"table": "promotions"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,54 @@
+{
+	"name": "stg_prod_subcategory",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Linkservicegen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "STG_PRODUCT_SUBCATEGORY.csv",
+				"folderPath": "target/AzureProject/stg",
+				"fileSystem": "data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "PRODUCT_SUBCATEGORY_ID",
+				"type": "String"
+			},
+			{
+				"name": "PRODUCT_SUBCATEGORY_NAME",
+				"type": "String"
+			},
+			{
+				"name": "PRODUCT_SIZE",
+				"type": "String"
+			},
+			{
+				"name": "PRODUCT_CATEGORY_ID",
+				"type": "String"
+			},
+			{
+				"name": "IS_ACTIVE",
+				"type": "String"
+			},
+			{
+				"name": "CREATE_USER_ID",
+				"type": "String"
+			},
+			{
+				"name": "CREATE_DATE",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

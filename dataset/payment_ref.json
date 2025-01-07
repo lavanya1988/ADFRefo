@@ -1,0 +1,36 @@
+{
+	"name": "payment_ref",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Payment_Ref_Key",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Payment_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Payment_Type",
+				"type": "varchar"
+			},
+			{
+				"name": "STG_CREATE_DATE",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "hr",
+			"table": "PAYMENT_REF"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
