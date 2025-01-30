@@ -62,7 +62,13 @@
 				"outputs": [
 					{
 						"referenceName": "tgt_emp_table",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"tgt_param": {
+								"value": "@pipeline().parameters.filename",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}

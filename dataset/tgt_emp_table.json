@@ -5,11 +5,20 @@
 			"referenceName": "Linkservicegen2",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"tgt_param": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().tgt_param",
+					"type": "Expression"
+				},
 				"folderPath": "target",
 				"fileSystem": "data"
 			},
