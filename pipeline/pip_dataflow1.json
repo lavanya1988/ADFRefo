@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "AP_Product_Topping_Scd2",
+						"referenceName": "df_merge_mlpl_rows_sngl_row",
 						"type": "DataFlowReference"
 					},
 					"compute": {
