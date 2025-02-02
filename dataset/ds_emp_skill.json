@@ -1,0 +1,37 @@
+{
+	"name": "ds_emp_skill",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Linkservicegen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "emp_skills.csv",
+				"folderPath": "source",
+				"fileSystem": "data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "emp_id",
+				"type": "String"
+			},
+			{
+				"name": "emp_name",
+				"type": "String"
+			},
+			{
+				"name": "skill",
+				"type": "String"
+			}
+		]
+	}
+}
