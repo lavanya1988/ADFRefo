@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "df_merge_mlpl_rows_sngl_row",
+						"referenceName": "df_singlrow_converted_mulpl_rows",
 						"type": "DataFlowReference"
 					},
 					"compute": {
