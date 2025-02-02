@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": "tgt_emp_skills.csv",
 				"folderPath": "target",
 				"fileSystem": "data"
 			},

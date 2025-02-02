@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "DelimitedText10",
+						"referenceName": "ds_tgt_empskill",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -54,7 +54,7 @@
 				"          emp_id as string,",
 				"          name as string",
 				"     ),",
-				"     partitionFileNames:['emp_multiple_skills.csv'],",
+				"     partitionFileNames:['emp_skills.csv'],",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
