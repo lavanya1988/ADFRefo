@@ -96,7 +96,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"filename": {
-								"value": "@activity('Lookup1').output.firstRow.name",
+								"value": "@activity('Lookup1').output.firstRow.dep_name",
 								"type": "Expression"
 							}
 						}
