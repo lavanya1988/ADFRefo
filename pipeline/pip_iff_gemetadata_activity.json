@@ -32,7 +32,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "Message",
-								"value": "'Load run is skipped'"
+								"value": "'load run skipped'"
 							}
 						}
 					],
