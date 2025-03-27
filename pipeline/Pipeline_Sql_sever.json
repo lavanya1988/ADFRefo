@@ -38,13 +38,21 @@
 				"inputs": [
 					{
 						"referenceName": "SqlServerTable_master",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Table_name": "student",
+							"Schema_Name": "dbo"
+						}
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "SqlServerTable_master",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Table_name": "student_tgt",
+							"Schema_Name": "dbo"
+						}
 					}
 				]
 			}
