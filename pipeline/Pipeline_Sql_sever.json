@@ -22,10 +22,17 @@
 					},
 					"sink": {
 						"type": "SqlServerSink",
-						"writeBehavior": "insert",
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": true,
+							"keys": [
+								"Emp_ID"
+							]
+						},
 						"sqlWriterUseTableLock": false
 					},
 					"enableStaging": false,
+					"enableSkipIncompatibleRow": false,
 					"translator": {
 						"type": "TabularTranslator",
 						"typeConversion": true,
