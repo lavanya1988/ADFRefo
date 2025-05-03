@@ -55,7 +55,7 @@
 						"parameters": {
 							"Filesystem": "data",
 							"Directory": "Input",
-							"Filename": "samle_data.csv"
+							"Filename": "sample_data.csv"
 						}
 					}
 				],
