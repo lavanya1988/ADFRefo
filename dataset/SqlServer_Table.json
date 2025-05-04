@@ -1,5 +1,5 @@
 {
-	"name": "AzureSql_Table",
+	"name": "SqlServer_Table",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase1",
