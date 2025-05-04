@@ -1,5 +1,5 @@
 {
-	"name": "Pip_ADLS_AzureSql",
+	"name": "Pip_LoadData_ADLS_AzureSql",
 	"properties": {
 		"activities": [
 			{
