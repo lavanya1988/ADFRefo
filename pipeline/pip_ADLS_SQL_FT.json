@@ -32,6 +32,21 @@
 						"sqlWriterUseTableLock": false
 					},
 					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "Linkservicegen2",
+								"type": "LinkedServiceReference"
+							},
+							"path": "data/LOG_FT/"
+						}
+					},
 					"translator": {
 						"type": "TabularTranslator",
 						"mappings": [
