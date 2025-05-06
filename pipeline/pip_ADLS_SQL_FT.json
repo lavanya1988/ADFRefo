@@ -27,7 +27,7 @@
 						}
 					},
 					"sink": {
-						"type": "AzureSqlSink",
+						"type": "SqlServerSink",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
@@ -54,11 +54,11 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "SqlServer_Table",
+						"referenceName": "SqlServerTable_master",
 						"type": "DatasetReference",
 						"parameters": {
-							"schema": "dbo",
-							"Table_name": "emp1_tgt"
+							"Table_name": "emp1_tgt",
+							"Schema_Name": "dbo"
 						}
 					}
 				]
