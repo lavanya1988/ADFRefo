@@ -296,6 +296,10 @@
 										"Directory": {
 											"value": "@pipeline().parameters.p_ARCHIVE",
 											"type": "Expression"
+										},
+										"Filename": {
+											"value": "@concat(item().SOURCE_TABLE,'_utcNow()','.csv')",
+											"type": "Expression"
 										}
 									}
 								}
