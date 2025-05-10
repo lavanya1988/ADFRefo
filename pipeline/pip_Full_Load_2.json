@@ -214,6 +214,92 @@
 									}
 								}
 							]
+						},
+						{
+							"name": "Copy data1_copy1",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "Copy data1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"recursive": true,
+										"enablePartitionDiscovery": false
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "ADLS_DataSet",
+									"type": "DatasetReference",
+									"parameters": {
+										"Filesystem": {
+											"value": "@pipeline().parameters.p_Container_Name",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.p_Directory_Name",
+											"type": "Expression"
+										},
+										"Filename": "@concat(item().SOURCE_TABLE,'.csv')"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ADLS_DataSet",
+									"type": "DatasetReference",
+									"parameters": {
+										"Filesystem": {
+											"value": "@pipeline().parameters.p_Container_Name",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.p_ARCHIVE",
+											"type": "Expression"
+										}
+									}
+								}
+							]
 						}
 					]
 				}
@@ -231,6 +317,10 @@
 			"p_Directory_Name": {
 				"type": "string",
 				"defaultValue": "STAGE_AREA"
+			},
+			"p_ARCHIVE": {
+				"type": "string",
+				"defaultValue": "ARCHIVE"
 			}
 		},
 		"folder": {
