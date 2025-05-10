@@ -1,0 +1,62 @@
+{
+	"name": "pip_Full_Load_2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup1",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT * FROM hr.control_table_learnIT WHERE IS_aCT_IND='Y' ",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "SqlServerTable_master",
+						"type": "DatasetReference",
+						"parameters": {
+							"Table_name": {
+								"value": " ",
+								"type": "Expression"
+							},
+							"Schema_Name": {
+								"value": " ",
+								"type": "Expression"
+							}
+						}
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": []
+			}
+		],
+		"folder": {
+			"name": "New_Azure"
+		},
+		"annotations": []
+	}
+}
