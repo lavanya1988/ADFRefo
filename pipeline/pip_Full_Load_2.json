@@ -191,7 +191,21 @@
 							"outputs": [
 								{
 									"referenceName": "ADLS_DataSet",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"Filesystem": {
+											"value": "@pipeline().parameters.p_Container_Name",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.p_Directory_Name",
+											"type": "Expression"
+										},
+										"Filename": {
+											"value": "@concat(item().SOURCE_TABLE,'.csv')",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						}
