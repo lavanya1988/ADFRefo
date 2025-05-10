@@ -18,7 +18,7 @@
 					"source": {
 						"type": "SqlServerSource",
 						"sqlReaderQuery": {
-							"value": "SELECT * FROM dbo.control_table_learnIT WHERE IS_aCT_IND='Y' and source_system=@{pipeline().parameters.p_SOURCE_SYSTEM}",
+							"value": "SELECT * FROM dbo.control_table_learnIT WHERE IS_aCT_IND='Y' and source_system=@{pipeline().parameters.p_SOURCE_SYSTEM} and Load_Type=@{pipeline().parameters.p_Load_Type}",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -372,6 +372,10 @@
 			"p_ARCHIVE": {
 				"type": "string",
 				"defaultValue": "ARCHIVE"
+			},
+			"p_Load_Type": {
+				"type": "string",
+				"defaultValue": "'FULL'"
 			}
 		},
 		"folder": {
