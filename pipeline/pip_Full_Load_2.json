@@ -62,7 +62,14 @@
 						{
 							"name": "Copy data1",
 							"type": "Copy",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "Copy data2",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "0.12:00:00",
 								"retry": 0,
@@ -125,6 +132,68 @@
 									}
 								}
 							]
+						},
+						{
+							"name": "Copy data2",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "SqlServerSource",
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "SqlServerTable_master",
+									"type": "DatasetReference",
+									"parameters": {
+										"Table_name": {
+											"value": "@item().SOURCE_TABLE",
+											"type": "Expression"
+										},
+										"Schema_Name": {
+											"value": "@item().SOURCE_SCHEMA",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ADLS_DataSet",
+									"type": "DatasetReference"
+								}
+							]
 						}
 					]
 				}
@@ -134,6 +203,14 @@
 			"p_SOURCE_SYSTEM": {
 				"type": "string",
 				"defaultValue": " 'SQL_SERVER'"
+			},
+			"p_Container_Name": {
+				"type": "string",
+				"defaultValue": " data"
+			},
+			"p_Directory_Name": {
+				"type": "string",
+				"defaultValue": " STAGE_AREA"
 			}
 		},
 		"folder": {
