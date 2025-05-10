@@ -220,11 +220,11 @@
 			},
 			"p_Container_Name": {
 				"type": "string",
-				"defaultValue": " data"
+				"defaultValue": "data"
 			},
 			"p_Directory_Name": {
 				"type": "string",
-				"defaultValue": " STAGE_AREA"
+				"defaultValue": "STAGE_AREA"
 			}
 		},
 		"folder": {
