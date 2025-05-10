@@ -18,7 +18,7 @@
 					"source": {
 						"type": "SqlServerSource",
 						"sqlReaderQuery": {
-							"value": "ELECT * FROM hr.control_table_learnIT WHERE IS_aCT_IND='Y' and source_system=@{pipeline().parameters.p_SOURCE_SYSTEM}",
+							"value": "ELECT * FROM dbo.control_table_learnIT WHERE IS_aCT_IND='Y' and source_system=@{pipeline().parameters.p_SOURCE_SYSTEM}",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
