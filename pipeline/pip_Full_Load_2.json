@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT * FROM hr.control_table_learnIT WHERE IS_aCT_IND='Y' ",
+						"sqlReaderQuery": "SELECT * FROM dbo.control_table_learnIT WHERE IS_aCT_IND='Y' ",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
