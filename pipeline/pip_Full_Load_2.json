@@ -298,12 +298,35 @@
 											"type": "Expression"
 										},
 										"Filename": {
-											"value": "@concat(item().SOURCE_TABLE,'_utcNow()','.csv')",
+											"value": "@concat(item().SOURCE_TABLE,'_',utcNow(),'.csv')",
 											"type": "Expression"
 										}
 									}
 								}
 							]
+						},
+						{
+							"name": "Delete1",
+							"type": "Delete",
+							"dependsOn": [
+								{
+									"activity": "Copy data1_copy1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"enableLogging": true
+							}
 						}
 					]
 				}
