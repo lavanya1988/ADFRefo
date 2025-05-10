@@ -80,15 +80,20 @@
 							"userProperties": [],
 							"typeProperties": {
 								"source": {
-									"type": "SqlServerSource",
-									"queryTimeout": "02:00:00",
-									"partitionOption": "None"
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"recursive": true,
+										"enablePartitionDiscovery": false
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
 								},
 								"sink": {
 									"type": "SqlServerSink",
 									"writeBehavior": "insert",
-									"sqlWriterUseTableLock": false,
-									"tableOption": "autoCreate"
+									"sqlWriterUseTableLock": false
 								},
 								"enableStaging": false,
 								"translator": {
@@ -102,17 +107,18 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "SqlServerTable_master",
+									"referenceName": "ADLS_DataSet",
 									"type": "DatasetReference",
 									"parameters": {
-										"Table_name": {
-											"value": "@item().SOURCE_TABLE",
+										"Filesystem": {
+											"value": "@pipeline().parameters.p_Container_Name",
 											"type": "Expression"
 										},
-										"Schema_Name": {
-											"value": "@item().SOURCE_SCHEMA",
+										"Directory": {
+											"value": "@pipeline().parameters.p_Directory_Name",
 											"type": "Expression"
-										}
+										},
+										"Filename": "@concat(item().SOURCE_TABLE,'.csv')"
 									}
 								}
 							],
