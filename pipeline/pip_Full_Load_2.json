@@ -97,7 +97,7 @@
 									"upsertSettings": {
 										"useTempDB": true,
 										"keys": [
-											""
+											"UPDATE_KEY"
 										]
 									},
 									"sqlWriterUseTableLock": false
