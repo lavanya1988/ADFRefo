@@ -92,14 +92,7 @@
 								},
 								"sink": {
 									"type": "SqlServerSink",
-									"writeBehavior": "upsert",
-									"upsertSettings": {
-										"useTempDB": true,
-										"keys": {
-											"value": "UPDATE_KEY: [\n  \"@{item().id}\",\n  \"@{item().dept_id}\"\n]",
-											"type": "Expression"
-										}
-									},
+									"writeBehavior": "insert",
 									"sqlWriterUseTableLock": false
 								},
 								"enableStaging": false,
