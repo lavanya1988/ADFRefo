@@ -381,6 +381,10 @@
 			"p_Load_Type": {
 				"type": "string",
 				"defaultValue": "'FULL'"
+			},
+			"p_UPDATE_KEY": {
+				"type": "string",
+				"defaultValue": "'UPDATEKEY'"
 			}
 		},
 		"folder": {
