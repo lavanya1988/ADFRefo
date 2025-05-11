@@ -156,7 +156,7 @@
 								"source": {
 									"type": "SqlServerSource",
 									"sqlReaderQuery": {
-										"value": "SELECT * FROM @{item().SOURCE_SCHEMA}.@{item().SOURCE_TABLE} WHERE claim_date>@{item().LAST_MODIFIED_DATE}",
+										"value": "SELECT * FROM @{item().SOURCE_SCHEMA}.@{item().SOURCE_TABLE} WHERE claim_date>'@{item().LAST_MODIFIED_DATE}''",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
