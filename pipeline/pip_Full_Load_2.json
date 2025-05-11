@@ -96,7 +96,14 @@
 										"value": "TRUNCATE TABLE @{item().TARGET_SCHEMA}.@{item().TARGET_TABLE}",
 										"type": "Expression"
 									},
-									"writeBehavior": "insert",
+									"writeBehavior": "upsert",
+									"upsertSettings": {
+										"useTempDB": true,
+										"keys": {
+											"value": "@item().UPDATE_KEY",
+											"type": "Expression"
+										}
+									},
 									"sqlWriterUseTableLock": false
 								},
 								"enableStaging": false,
