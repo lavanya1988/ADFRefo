@@ -18,7 +18,7 @@
 					"source": {
 						"type": "SqlServerSource",
 						"sqlReaderQuery": {
-							"value": "SELECT * FROM dbo.control_table_learnIT WHERE IS_aCT_IND='Y' and source_system=@{pipeline().parameters.p_SOURCE_SYSTEM} and Load_Type=@{pipeline().parameters.p_Load_Type}",
+							"value": "SELECT * FROM dbo.control_table_learnIT WHERE IS_ACT_IND='Y' and source_system=@{pipeline().parameters.p_SOURCE_SYSTEM} and Load_Type=@{pipeline().parameters.p_Load_Type}",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -389,8 +389,7 @@
 				"defaultValue": "'FULL'"
 			},
 			"p_UPDATE_KEY": {
-				"type": "string",
-				"defaultValue": "'UPDATE_KEY'"
+				"type": "string"
 			}
 		},
 		"folder": {
