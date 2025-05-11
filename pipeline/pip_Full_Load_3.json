@@ -18,7 +18,7 @@
 					"source": {
 						"type": "SqlServerSource",
 						"sqlReaderQuery": {
-							"value": "SELECT * FROM dbo.control_table_learnIT WHERE IS_aCT_IND='Y' and source_system=@{pipeline().parameters.p_SOURCE_SYSTEM} and Load_Type=@{pipeline().parameters.p_Load_Type}",
+							"value": "SELECT * FROM dbo.control_table_learnIT WHERE IS_aCT_IND='Y' and source_system=@{pipeline().parameters.p_SOURCE_SYSTEM} and Load_Type=@{pipeline().parameters.p_Load_Type} and UPDATE_KEY=@{pipeline().parameters.p_UPDATE_KEY}",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -92,11 +92,14 @@
 								},
 								"sink": {
 									"type": "SqlServerSink",
-									"preCopyScript": {
-										"value": "TRUNCATE TABLE @{item().TARGET_SCHEMA}.@{item().TARGET_TABLE}",
-										"type": "Expression"
+									"writeBehavior": "upsert",
+									"upsertSettings": {
+										"useTempDB": true,
+										"keys": {
+											"value": "@item().UPDATE_KEY",
+											"type": "Expression"
+										}
 									},
-									"writeBehavior": "insert",
 									"sqlWriterUseTableLock": false
 								},
 								"enableStaging": false,
