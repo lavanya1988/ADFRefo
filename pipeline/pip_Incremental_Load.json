@@ -385,7 +385,7 @@
 									{
 										"type": "Query",
 										"text": {
-											"value": "UPDATE dbo.control_table_learnIT SET LAST_MODIFIED_DATE = getDdate() WHERE SOURCE_SCHEMA='dbo'and SOURCE_TABLE='learnit_batch9_claim'",
+											"value": "UPDATE dbo.control_table_learnIT SET LAST_MODIFIED_DATE = getddate() WHERE SOURCE_SCHEMA='dbo'and SOURCE_TABLE='learnit_batch9_claim'",
 											"type": "Expression"
 										}
 									}
