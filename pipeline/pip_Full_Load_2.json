@@ -96,10 +96,9 @@
 									"writeBehavior": "upsert",
 									"upsertSettings": {
 										"useTempDB": true,
-										"keys": {
-											"value": "\"PrimaryKeys\": {\n  \"type\": \"Array\",\n  \"defaultValue\": [\"id\", \"dept_id\"]\n}\n",
-											"type": "Expression"
-										}
+										"keys": [
+											""
+										]
 									},
 									"sqlWriterUseTableLock": false
 								},
