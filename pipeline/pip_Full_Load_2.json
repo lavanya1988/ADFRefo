@@ -95,9 +95,10 @@
 									"writeBehavior": "upsert",
 									"upsertSettings": {
 										"useTempDB": true,
-										"keys": [
-											""
-										]
+										"keys": {
+											"value": "@split(item().UPDATE_KEY, ',')",
+											"type": "Expression"
+										}
 									},
 									"sqlWriterUseTableLock": false
 								},
@@ -392,10 +393,6 @@
 			"p_Load_Type": {
 				"type": "string",
 				"defaultValue": "'FULL'"
-			},
-			"p_Upsert_Key": {
-				"type": "array",
-				"defaultValue": "UPDATE_KEY"
 			}
 		},
 		"folder": {
