@@ -92,10 +92,6 @@
 								},
 								"sink": {
 									"type": "SqlServerSink",
-									"preCopyScript": {
-										"value": "TRUNCATE TABLE @{item().TARGET_SCHEMA}.@{item().TARGET_TABLE}",
-										"type": "Expression"
-									},
 									"writeBehavior": "upsert",
 									"upsertSettings": {
 										"useTempDB": true,
