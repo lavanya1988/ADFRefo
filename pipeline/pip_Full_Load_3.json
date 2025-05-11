@@ -343,7 +343,8 @@
 										"Directory": {
 											"value": "@pipeline().parameters.p_ARCHIVE",
 											"type": "Expression"
-										}
+										},
+										"Filename": " "
 									}
 								},
 								"enableLogging": false,
