@@ -129,11 +129,11 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"Table_name": {
-											"value": "@item().TARGET_TABLE",
+											"value": "@{item().TARGET_TABLE}",
 											"type": "Expression"
 										},
 										"Schema_Name": {
-											"value": "@item().TARGET_SCHEMA",
+											"value": "@{item().TARGET_SCHEMA}",
 											"type": "Expression"
 										}
 									}
@@ -189,11 +189,11 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"Table_name": {
-											"value": "@item().SOURCE_TABLE",
+											"value": "@{item().SOURCE_TABLE}",
 											"type": "Expression"
 										},
 										"Schema_Name": {
-											"value": "@item().SOURCE_SCHEMA",
+											"value": "@{item().SOURCE_SCHEMA}",
 											"type": "Expression"
 										}
 									}
