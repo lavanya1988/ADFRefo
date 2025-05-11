@@ -96,7 +96,7 @@
 									"upsertSettings": {
 										"useTempDB": true,
 										"keys": {
-											"value": "@item().UPDATE_KEY",
+											"value": "UPDATE_KEY: [\n  \"@{item().id}\",\n  \"@{item().dept_id}\"\n]",
 											"type": "Expression"
 										}
 									},
