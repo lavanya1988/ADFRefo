@@ -95,9 +95,10 @@
 									"writeBehavior": "upsert",
 									"upsertSettings": {
 										"useTempDB": true,
-										"keys": [
-											"UPDATE_KEY"
-										]
+										"keys": {
+											"value": "@item().TARGET_SCHEMA.TARGET_TABLE.p_UPDATE_KEY",
+											"type": "Expression"
+										}
 									},
 									"sqlWriterUseTableLock": false
 								},
