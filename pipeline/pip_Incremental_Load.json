@@ -93,7 +93,8 @@
 								"sink": {
 									"type": "SqlServerSink",
 									"writeBehavior": "insert",
-									"sqlWriterUseTableLock": false
+									"sqlWriterUseTableLock": false,
+									"tableOption": "autoCreate"
 								},
 								"enableStaging": false,
 								"translator": {
@@ -340,7 +341,8 @@
 										"Directory": {
 											"value": "@pipeline().parameters.p_ARCHIVE",
 											"type": "Expression"
-										}
+										},
+										"Filename": " "
 									}
 								},
 								"enableLogging": false,
