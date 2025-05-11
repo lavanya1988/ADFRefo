@@ -95,10 +95,9 @@
 									"writeBehavior": "upsert",
 									"upsertSettings": {
 										"useTempDB": true,
-										"keys": {
-											"value": "@item().TARGET_SCHEMA.TARGET_TABLE.p_UPDATE_KEY",
-											"type": "Expression"
-										}
+										"keys": [
+											""
+										]
 									},
 									"sqlWriterUseTableLock": false
 								},
@@ -393,6 +392,10 @@
 			"p_Load_Type": {
 				"type": "string",
 				"defaultValue": "'FULL'"
+			},
+			"p_Upsert_Key": {
+				"type": "array",
+				"defaultValue": "UPDATE_KEY"
 			}
 		},
 		"folder": {
