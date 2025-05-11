@@ -344,7 +344,10 @@
 											"value": "@pipeline().parameters.p_ARCHIVE",
 											"type": "Expression"
 										},
-										"Filename": " "
+										"Filename": {
+											"value": " ",
+											"type": "Expression"
+										}
 									}
 								},
 								"enableLogging": false,
