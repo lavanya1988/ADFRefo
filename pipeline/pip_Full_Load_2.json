@@ -395,7 +395,7 @@
 			},
 			"p_UPDATE_KEY": {
 				"type": "string",
-				"defaultValue": "UPDATE_KEY"
+				"defaultValue": "'UPDATE_KEY'"
 			}
 		},
 		"folder": {
