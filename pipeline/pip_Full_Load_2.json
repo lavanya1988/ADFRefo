@@ -93,7 +93,14 @@
 								"sink": {
 									"type": "SqlServerSink",
 									"preCopyScript": "TRUNCATE TABLE @{item().TARGET_SCHEMA}.@{item().TARGET_TABLE}",
-									"writeBehavior": "insert",
+									"writeBehavior": "upsert",
+									"upsertSettings": {
+										"useTempDB": true,
+										"keys": {
+											"value": "\"PrimaryKeys\": {\n  \"type\": \"Array\",\n  \"defaultValue\": [\"id\", \"dept_id\"]\n}\n",
+											"type": "Expression"
+										}
+									},
 									"sqlWriterUseTableLock": false
 								},
 								"enableStaging": false,
@@ -384,7 +391,7 @@
 			},
 			"p_UPDATE_KEY": {
 				"type": "string",
-				"defaultValue": "'UPDATEKEY'"
+				"defaultValue": "'UPDATE_KEY"
 			}
 		},
 		"folder": {
