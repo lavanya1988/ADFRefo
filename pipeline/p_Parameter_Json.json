@@ -99,11 +99,6 @@
 				]
 			}
 		],
-		"parameters": {
-			"DeptID": {
-				"type": "string"
-			}
-		},
 		"folder": {
 			"name": "New_Azure"
 		},
