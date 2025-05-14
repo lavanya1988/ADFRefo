@@ -55,7 +55,7 @@
 					"source": {
 						"type": "SqlServerSource",
 						"sqlReaderQuery": {
-							"value": "select * from dbo.learnit_batch9_employee where dept_id=  @ activity('Lookup1').output.firstRow.p_DEPT_ID",
+							"value": "select * from dbo.learnit_batch9_employee where dept_id=  @ {activity('Lookup1').output.firstRow.p_DEPT_ID}",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
