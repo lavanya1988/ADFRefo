@@ -55,7 +55,7 @@
 					"source": {
 						"type": "SqlServerSource",
 						"sqlReaderQuery": {
-							"value": "select * from dbo.learnit_batch9_employee where dept_id=  @{variables('v_Dep_Id')}",
+							"value": "select * from dbo.learnit_batch9_employee where dept_id=  @{variables('recordData')}",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -115,9 +115,9 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "v_Dep_Id",
+					"variableName": "recordData",
 					"value": {
-						"value": "@activity('Lookup1').output.firstRow.p_DEPT_ID",
+						"value": "@string(activity('Lookup1').output.firstRow.p_DEPT_ID)",
 						"type": "Expression"
 					}
 				}
@@ -128,6 +128,9 @@
 				"type": "String"
 			},
 			"v_DEP_ID": {
+				"type": "String"
+			},
+			"recordData": {
 				"type": "String"
 			}
 		},
