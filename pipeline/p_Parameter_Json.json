@@ -115,7 +115,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "v_DEP_ID",
+					"variableName": "v_Dep_Id",
 					"value": {
 						"value": "@activity('Lookup1').output.firstRow.p_DEPT_ID",
 						"type": "Expression"
