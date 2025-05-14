@@ -117,7 +117,7 @@
 				"typeProperties": {
 					"variableName": "recordData",
 					"value": {
-						"value": "@string(activity('Lookup1').output.firstRow.p_DEPT_ID)",
+						"value": "activity('Lookup1').output.firstRow.p_DEPT_ID",
 						"type": "Expression"
 					}
 				}
