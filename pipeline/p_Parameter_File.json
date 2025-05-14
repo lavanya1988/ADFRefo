@@ -42,7 +42,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Lookup1",
+						"activity": "Set variable1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -60,7 +60,7 @@
 					"source": {
 						"type": "SqlServerSource",
 						"sqlReaderQuery": {
-							"value": "select * from dbo.learnit_batch9_employee where dept_id =  @{activity('Lookup1').output.firstRow.Department_ID}",
+							"value": "select * from dbo.learnit_batch9_employee where dept_id =  @{variables('v_Dep_Id')}",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -102,8 +102,37 @@
 						}
 					}
 				]
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "v_Dep_Id",
+					"value": {
+						"value": "@activity('Lookup1').output.firstRow.Department_ID",
+						"type": "Expression"
+					}
+				}
 			}
 		],
+		"variables": {
+			"v_Dep_Id": {
+				"type": "String"
+			}
+		},
 		"folder": {
 			"name": "New_Azure"
 		},
