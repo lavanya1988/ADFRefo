@@ -52,8 +52,51 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"enableStaging": false
-				}
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": {
+							"value": "select * from dbo.learnit_batch9_employee where dept_id= @{activity('Lookup1').output.firstRow}",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SqlServerTable_master",
+						"type": "DatasetReference",
+						"parameters": {
+							"Table_name": "dbo.learnit_batch9_employee",
+							"Schema_Name": "dbo"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "SqlServerTable_master",
+						"type": "DatasetReference",
+						"parameters": {
+							"Table_name": "dbo.learnit_batch9_employee_parameter_json",
+							"Schema_Name": "dbo"
+						}
+					}
+				]
 			}
 		],
 		"folder": {
