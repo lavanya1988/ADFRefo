@@ -44,7 +44,9 @@
 			"p_insurance_list": {
 				"type": "Array",
 				"defaultValue": [
-					"['Vehicle','Property','General','Health']"
+					"Vehicle",
+					"Health",
+					"Home"
 				]
 			},
 			"v_insurance_list": {
