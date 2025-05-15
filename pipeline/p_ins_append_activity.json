@@ -1,0 +1,62 @@
+{
+	"name": "p_ins_append_activity",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "v_insurance_list",
+					"value": {
+						"value": "@variables('p_insurance_list')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Append variable1",
+				"type": "AppendVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "p_append_var",
+					"value": {
+						"value": "@array('Dental')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"p_insurance_list": {
+				"type": "Array",
+				"defaultValue": [
+					"['Vehicle','Property','General','Health']"
+				]
+			},
+			"v_insurance_list": {
+				"type": "Array"
+			},
+			"p_append_var": {
+				"type": "Array"
+			}
+		},
+		"folder": {
+			"name": "New_Azure"
+		},
+		"annotations": []
+	}
+}
