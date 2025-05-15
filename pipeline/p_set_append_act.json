@@ -32,7 +32,7 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "v_insurance_list",
+					"variableName": "p_insurance_list",
 					"value": {
 						"value": "[\"Dental\"]",
 						"type": "Expression"
