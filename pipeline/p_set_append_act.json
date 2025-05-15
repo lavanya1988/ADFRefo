@@ -34,7 +34,7 @@
 				"typeProperties": {
 					"variableName": "p_append_var",
 					"value": {
-						"value": "@string('Dental')",
+						"value": "[\"Dental\"]",
 						"type": "Expression"
 					}
 				}
@@ -42,8 +42,6 @@
 			{
 				"name": "ForEach1",
 				"type": "ForEach",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Set variable2",
@@ -75,6 +73,8 @@
 			{
 				"name": "Set variable2",
 				"type": "SetVariable",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Append variable1",
