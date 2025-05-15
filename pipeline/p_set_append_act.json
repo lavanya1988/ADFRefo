@@ -53,7 +53,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@variables('v_insurance_list')",
+						"value": "@variables('p_append_var')",
 						"type": "Expression"
 					},
 					"isSequential": true,
