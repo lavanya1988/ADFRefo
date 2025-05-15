@@ -34,7 +34,7 @@
 				"typeProperties": {
 					"variableName": "p_insurance_list",
 					"value": {
-						"value": "[\"Dental\"]",
+						"value": "'Dental'",
 						"type": "Expression"
 					}
 				}
@@ -105,9 +105,6 @@
 				]
 			},
 			"v_insurance_list": {
-				"type": "Array"
-			},
-			"p_append_var": {
 				"type": "Array"
 			}
 		},
