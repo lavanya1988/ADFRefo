@@ -34,7 +34,7 @@
 				"typeProperties": {
 					"variableName": "p_append_var",
 					"value": {
-						"value": "@string('Dental')",
+						"value": "'Dental'",
 						"type": "Expression"
 					}
 				}
