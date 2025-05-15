@@ -52,11 +52,7 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"items": {
-						"value": "@variables('v_insurance_list')",
-						"type": "Expression"
-					},
-					"isSequential": true,
+					"isSequential": false,
 					"activities": [
 						{
 							"name": "Wait1",
