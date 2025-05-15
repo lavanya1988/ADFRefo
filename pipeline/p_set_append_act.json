@@ -32,7 +32,7 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "p_append_var",
+					"variableName": "v_insurance_list",
 					"value": {
 						"value": "[\"Dental\"]",
 						"type": "Expression"
@@ -73,8 +73,6 @@
 			{
 				"name": "Set variable2",
 				"type": "SetVariable",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Append variable1",
