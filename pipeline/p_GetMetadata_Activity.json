@@ -116,7 +116,10 @@
 									"referenceName": "SqlServerTable_master",
 									"type": "DatasetReference",
 									"parameters": {
-										"Table_name": "@replace('item().name','.csv','_metadata')",
+										"Table_name": {
+											"value": "@replace(item().name,'.csv','_metadata')",
+											"type": "Expression"
+										},
 										"Schema_Name": "dbo"
 									}
 								}
