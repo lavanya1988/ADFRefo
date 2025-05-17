@@ -81,7 +81,21 @@
 										"type": "DelimitedTextReadSettings"
 									}
 								},
-								"enableStaging": false
+								"sink": {
+									"type": "SqlServerSink",
+									"writeBehavior": "insert",
+									"sqlWriterUseTableLock": false,
+									"tableOption": "autoCreate"
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
 							},
 							"inputs": [
 								{
@@ -91,9 +105,19 @@
 										"Filesystem": "data",
 										"Directory": "STAGE_AREA",
 										"Filename": {
-											"value": "@replace('item().name','.csv','_metadata')",
+											"value": "@item().name",
 											"type": "Expression"
 										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "SqlServerTable_master",
+									"type": "DatasetReference",
+									"parameters": {
+										"Table_name": "@replace('item().name','.csv','_metadata')",
+										"Schema_Name": "dbo"
 									}
 								}
 							]
