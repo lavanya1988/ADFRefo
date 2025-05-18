@@ -156,8 +156,8 @@
 								},
 								"ifFalseActivities": [
 									{
-										"name": "Wait2",
-										"description": "copy_fail",
+										"name": "Fail",
+										"description": "",
 										"type": "Wait",
 										"dependsOn": [],
 										"userProperties": [],
