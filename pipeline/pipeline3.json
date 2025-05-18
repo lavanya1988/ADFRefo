@@ -168,8 +168,8 @@
 								],
 								"ifTrueActivities": [
 									{
-										"name": "Wait1",
-										"description": "copy",
+										"name": "copy_wait",
+										"description": "",
 										"type": "Wait",
 										"dependsOn": [],
 										"userProperties": [],
