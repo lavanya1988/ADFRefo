@@ -20,7 +20,11 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"Filesystem": "data",
-							"Directory": "Input_Dep"
+							"Directory": "Input_Dep",
+							"Filename": {
+								"value": " ",
+								"type": "Expression"
+							}
 						}
 					},
 					"fieldList": [
