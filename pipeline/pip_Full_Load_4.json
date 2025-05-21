@@ -606,7 +606,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@equals(concat(item().SOURCE_TABLE,'.csv'),'learnit_batch9_employee.csv')",
+									"value": "@equals(concat(item().SOURCE_TABLE,'.csv'),'learnit_batch9_employee')",
 									"type": "Expression"
 								},
 								"ifFalseActivities": [
