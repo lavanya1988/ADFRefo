@@ -594,9 +594,187 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@equals(,''",
+									"value": "@equals(item().TARGET_TABLE,'learnit_batch9_employee_tgt')",
 									"type": "Expression"
-								}
+								},
+								"ifFalseActivities": [
+									{
+										"name": "Copy data4",
+										"type": "Copy",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "DelimitedTextSource",
+												"storeSettings": {
+													"type": "AzureBlobFSReadSettings",
+													"recursive": true,
+													"enablePartitionDiscovery": false
+												},
+												"formatSettings": {
+													"type": "DelimitedTextReadSettings"
+												}
+											},
+											"sink": {
+												"type": "SqlServerSink",
+												"writeBehavior": "insert",
+												"sqlWriterUseTableLock": false,
+												"tableOption": "autoCreate"
+											},
+											"enableStaging": false,
+											"translator": {
+												"type": "TabularTranslator",
+												"mappings": [
+													{
+														"source": {
+															"name": "Emp_id",
+															"type": "String",
+															"physicalType": "String"
+														},
+														"sink": {
+															"name": "Emp_id",
+															"type": "String",
+															"physicalType": "nvarchar"
+														}
+													},
+													{
+														"source": {
+															"name": "Emp_Name",
+															"type": "String",
+															"physicalType": "String"
+														},
+														"sink": {
+															"name": "Emp_Name",
+															"type": "String",
+															"physicalType": "nvarchar"
+														}
+													},
+													{
+														"source": {
+															"name": "Department",
+															"type": "String",
+															"physicalType": "String"
+														},
+														"sink": {
+															"name": "Department",
+															"type": "String",
+															"physicalType": "nvarchar"
+														}
+													},
+													{
+														"source": {
+															"name": "Salary",
+															"type": "String",
+															"physicalType": "String"
+														},
+														"sink": {
+															"name": "Salary",
+															"type": "String",
+															"physicalType": "nvarchar"
+														}
+													}
+												],
+												"typeConversion": true,
+												"typeConversionSettings": {
+													"allowDataTruncation": true,
+													"treatBooleanAsNumber": false
+												}
+											}
+										},
+										"inputs": [
+											{
+												"referenceName": "ADLS_DataSet",
+												"type": "DatasetReference",
+												"parameters": {
+													"Filesystem": "data",
+													"Directory": "Input",
+													"Filename": "samaple_data.csv"
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "SqlServerTable_master",
+												"type": "DatasetReference",
+												"parameters": {
+													"Table_name": "sample_data_tgt",
+													"Schema_Name": "dbo"
+												}
+											}
+										]
+									}
+								],
+								"ifTrueActivities": [
+									{
+										"name": "Copy data3",
+										"type": "Copy",
+										"dependsOn": [],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "DelimitedTextSource",
+												"storeSettings": {
+													"type": "AzureBlobFSReadSettings",
+													"recursive": true,
+													"enablePartitionDiscovery": false
+												},
+												"formatSettings": {
+													"type": "DelimitedTextReadSettings"
+												}
+											},
+											"sink": {
+												"type": "SqlServerSink",
+												"writeBehavior": "insert",
+												"sqlWriterUseTableLock": false,
+												"tableOption": "autoCreate"
+											},
+											"enableStaging": false,
+											"translator": {
+												"type": "TabularTranslator",
+												"typeConversion": true,
+												"typeConversionSettings": {
+													"allowDataTruncation": true,
+													"treatBooleanAsNumber": false
+												}
+											}
+										},
+										"inputs": [
+											{
+												"referenceName": "ADLS_DataSet",
+												"type": "DatasetReference",
+												"parameters": {
+													"Filesystem": "data",
+													"Directory": "Input",
+													"Filename": "Emp1.csv"
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "SqlServerTable_master",
+												"type": "DatasetReference",
+												"parameters": {
+													"Table_name": "EMP_TARGET",
+													"Schema_Name": "dbo"
+												}
+											}
+										]
+									}
+								]
 							}
 						}
 					]
