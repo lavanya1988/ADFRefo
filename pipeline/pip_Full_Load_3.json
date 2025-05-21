@@ -92,7 +92,10 @@
 								},
 								"sink": {
 									"type": "SqlServerSink",
-									"preCopyScript": "TRUNCATE TABLE @{item().TARGET_SCHEMA}.@{item().TARGET_TABLE}",
+									"preCopyScript": {
+										"value": "TRUNCATE TABLE @{item().TARGET_SCHEMA}.@{item().TARGET_TABLE}",
+										"type": "Expression"
+									},
 									"writeBehavior": "upsert",
 									"upsertSettings": {
 										"useTempDB": true,
@@ -388,10 +391,6 @@
 			"p_Load_Type": {
 				"type": "string",
 				"defaultValue": "'FULL'"
-			},
-			"p_UPDATE_KEY": {
-				"type": "string",
-				"defaultValue": "'UPDATE_KEY'"
 			}
 		},
 		"folder": {
