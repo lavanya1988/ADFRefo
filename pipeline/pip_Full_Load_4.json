@@ -594,7 +594,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@equals(item().TARGET_TABLE,'learnit_batch9_employee_tgt')",
+									"value": "@equals(item().SOURCE_TABLE,'learnit_batch9_employee')",
 									"type": "Expression"
 								},
 								"ifFalseActivities": [
