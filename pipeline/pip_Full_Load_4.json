@@ -807,12 +807,12 @@
 							"userProperties": [],
 							"typeProperties": {
 								"on": {
-									"value": "@concat(item().SOURCE_TABLE,'.csv')",
+									"value": "@item().TARGET_TABLE",
 									"type": "Expression"
 								},
 								"cases": [
 									{
-										"value": "learnit_batch9_employee.csv",
+										"value": "learnit_batch9_employee",
 										"activities": [
 											{
 												"name": "Copy data5",
@@ -879,7 +879,7 @@
 										]
 									},
 									{
-										"value": "learnit_batch9_department.csv",
+										"value": "learnit_batch9_department",
 										"activities": [
 											{
 												"name": "Copy data6",
