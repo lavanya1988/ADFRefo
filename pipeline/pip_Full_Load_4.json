@@ -594,7 +594,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@equals(item().SOURCE_TABLE,'learnit_batch9_employee')",
+									"value": "@equals(concat(item().SOURCE_TABLE,'.csv'),'learnit_batch9_employee')",
 									"type": "Expression"
 								},
 								"ifFalseActivities": [
