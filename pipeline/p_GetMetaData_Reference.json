@@ -1,5 +1,5 @@
 {
-	"name": "p_GetMetataData_Reference",
+	"name": "p_GetMetaData_Reference",
 	"properties": {
 		"activities": [
 			{
@@ -29,6 +29,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -66,6 +67,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
