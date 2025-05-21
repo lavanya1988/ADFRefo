@@ -372,6 +372,8 @@
 						{
 							"name": "Copy data1_copy2",
 							"type": "Copy",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [],
 							"policy": {
 								"timeout": "0.12:00:00",
@@ -595,6 +597,8 @@
 						{
 							"name": "If Condition1",
 							"type": "IfCondition",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "Copy data1_copy2",
@@ -802,7 +806,146 @@
 							],
 							"userProperties": [],
 							"typeProperties": {
-								"cases": []
+								"on": {
+									"value": "@concat(item().SOURCE_TABLE,'.csv')",
+									"type": "Expression"
+								},
+								"cases": [
+									{
+										"value": "learnit_batch9_employee.csv",
+										"activities": [
+											{
+												"name": "Copy data5",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "DelimitedTextSource",
+														"storeSettings": {
+															"type": "AzureBlobFSReadSettings",
+															"recursive": true,
+															"enablePartitionDiscovery": false
+														},
+														"formatSettings": {
+															"type": "DelimitedTextReadSettings"
+														}
+													},
+													"sink": {
+														"type": "SqlServerSink",
+														"writeBehavior": "insert",
+														"sqlWriterUseTableLock": false,
+														"tableOption": "autoCreate"
+													},
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "ADLS_DataSet",
+														"type": "DatasetReference",
+														"parameters": {
+															"Filesystem": "data",
+															"Directory": "Input",
+															"Filename": "Emp1.csv"
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "SqlServerTable_master",
+														"type": "DatasetReference",
+														"parameters": {
+															"Table_name": "EMP_SWITCH",
+															"Schema_Name": "dbo"
+														}
+													}
+												]
+											}
+										]
+									},
+									{
+										"value": "learnit_batch9_department.csv",
+										"activities": [
+											{
+												"name": "Copy data6",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "DelimitedTextSource",
+														"storeSettings": {
+															"type": "AzureBlobFSReadSettings",
+															"recursive": true,
+															"enablePartitionDiscovery": false
+														},
+														"formatSettings": {
+															"type": "DelimitedTextReadSettings"
+														}
+													},
+													"sink": {
+														"type": "SqlServerSink",
+														"writeBehavior": "insert",
+														"sqlWriterUseTableLock": false,
+														"tableOption": "autoCreate"
+													},
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "ADLS_DataSet",
+														"type": "DatasetReference",
+														"parameters": {
+															"Filesystem": "data",
+															"Directory": "Input",
+															"Filename": "Emp2.csv"
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "SqlServerTable_master",
+														"type": "DatasetReference",
+														"parameters": {
+															"Table_name": "EMP2_SWITCH",
+															"Schema_Name": "dbo"
+														}
+													}
+												]
+											}
+										]
+									}
+								]
 							}
 						},
 						{
