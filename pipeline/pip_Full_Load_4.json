@@ -96,15 +96,9 @@
 										"value": "TRUNCATE TABLE @{item().TARGET_SCHEMA}.@{item().TARGET_TABLE}",
 										"type": "Expression"
 									},
-									"writeBehavior": "upsert",
-									"upsertSettings": {
-										"useTempDB": true,
-										"keys": {
-											"value": "@item().UPDATE_KEY",
-											"type": "Expression"
-										}
-									},
-									"sqlWriterUseTableLock": false
+									"writeBehavior": "insert",
+									"sqlWriterUseTableLock": false,
+									"tableOption": "autoCreate"
 								},
 								"enableStaging": false,
 								"translator": {
@@ -366,6 +360,244 @@
 									"enablePartitionDiscovery": false
 								}
 							}
+						},
+						{
+							"name": "Copy data1_copy2",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"recursive": true,
+										"enablePartitionDiscovery": false
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "SqlServerSink",
+									"preCopyScript": {
+										"value": "TRUNCATE TABLE @{item().TARGET_SCHEMA}.@{item().TARGET_TABLE}",
+										"type": "Expression"
+									},
+									"writeBehavior": "insert",
+									"sqlWriterUseTableLock": false,
+									"tableOption": "autoCreate"
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "ADLS_DataSet",
+									"type": "DatasetReference",
+									"parameters": {
+										"Filesystem": {
+											"value": "@pipeline().parameters.p_Container_Name",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.p_Directory_Name",
+											"type": "Expression"
+										},
+										"Filename": "@concat(item().SOURCE_TABLE,'.csv')"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "SqlServerTable_master",
+									"type": "DatasetReference",
+									"parameters": {
+										"Table_name": {
+											"value": "@item().TARGET_TABLE",
+											"type": "Expression"
+										},
+										"Schema_Name": {
+											"value": "@item().TARGET_SCHEMA",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						},
+						{
+							"name": "Copy data1_copy1_copy1",
+							"type": "Copy",
+							"dependsOn": [
+								{
+									"activity": "If Condition1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"recursive": true,
+										"enablePartitionDiscovery": false
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "ADLS_DataSet",
+									"type": "DatasetReference",
+									"parameters": {
+										"Filesystem": {
+											"value": "@pipeline().parameters.p_Container_Name",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.p_Directory_Name",
+											"type": "Expression"
+										},
+										"Filename": "@concat(item().SOURCE_TABLE,'.csv')"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ADLS_DataSet",
+									"type": "DatasetReference",
+									"parameters": {
+										"Filesystem": {
+											"value": "@pipeline().parameters.p_Container_Name",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.p_ARCHIVE",
+											"type": "Expression"
+										},
+										"Filename": {
+											"value": "@concat(item().SOURCE_TABLE,'_',utcNow(),'.csv.gz')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						},
+						{
+							"name": "Delete1_copy1",
+							"type": "Delete",
+							"dependsOn": [
+								{
+									"activity": "Copy data1_copy1_copy1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "ADLS_DataSet",
+									"type": "DatasetReference",
+									"parameters": {
+										"Filesystem": {
+											"value": "@pipeline().parameters.p_Container_Name",
+											"type": "Expression"
+										},
+										"Directory": {
+											"value": "@pipeline().parameters.p_ARCHIVE",
+											"type": "Expression"
+										},
+										"Filename": {
+											"value": " ",
+											"type": "Expression"
+										}
+									}
+								},
+								"enableLogging": false,
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"modifiedDatetimeEnd": {
+										"value": "@adddays(utcNow(),-30)",
+										"type": "Expression"
+									},
+									"wildcardFileName": "*.csv.gz",
+									"enablePartitionDiscovery": false
+								}
+							}
+						},
+						{
+							"name": "If Condition1",
+							"type": "IfCondition",
+							"dependsOn": [
+								{
+									"activity": "Copy data1_copy2",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@equals(,''",
+									"type": "Expression"
+								}
+							}
 						}
 					]
 				}
@@ -391,10 +623,6 @@
 			"p_Load_Type": {
 				"type": "string",
 				"defaultValue": "'FULL'"
-			},
-			"p_UPDATE_KEY": {
-				"type": "string",
-				"defaultValue": "'UPDATE_KEY'"
 			}
 		},
 		"folder": {
