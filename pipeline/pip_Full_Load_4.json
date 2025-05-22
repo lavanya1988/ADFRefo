@@ -807,7 +807,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"on": {
-									"value": "@item().TARGET_TABLE",
+									"value": "@item().SOURCE_TABLE",
 									"type": "Expression"
 								},
 								"cases": [
