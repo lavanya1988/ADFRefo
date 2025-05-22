@@ -980,6 +980,44 @@
 											"enableStaging": false,
 											"translator": {
 												"type": "TabularTranslator",
+												"mappings": [
+													{
+														"source": {
+															"name": "SNo",
+															"type": "String",
+															"physicalType": "String"
+														},
+														"sink": {
+															"name": "SNo",
+															"type": "String",
+															"physicalType": "nvarchar"
+														}
+													},
+													{
+														"source": {
+															"name": "EmpID",
+															"type": "String",
+															"physicalType": "String"
+														},
+														"sink": {
+															"name": "EmpID",
+															"type": "String",
+															"physicalType": "nvarchar"
+														}
+													},
+													{
+														"source": {
+															"name": "EmpName",
+															"type": "String",
+															"physicalType": "String"
+														},
+														"sink": {
+															"name": "EmpName",
+															"type": "String",
+															"physicalType": "nvarchar"
+														}
+													}
+												],
 												"typeConversion": true,
 												"typeConversionSettings": {
 													"allowDataTruncation": true,
