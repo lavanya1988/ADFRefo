@@ -32,7 +32,7 @@
 									"parameters": {
 										"Filesystem": "data",
 										"Directory": "Input",
-										"Filename": "sample_data.csv"
+										"Filename": "samaple_data.csv"
 									}
 								},
 								"fieldList": [
