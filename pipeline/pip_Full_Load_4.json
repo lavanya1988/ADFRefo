@@ -62,8 +62,6 @@
 						{
 							"name": "Copy data1",
 							"type": "Copy",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "Copy data2",
@@ -149,8 +147,6 @@
 						{
 							"name": "Copy data2",
 							"type": "Copy",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [],
 							"policy": {
 								"timeout": "0.12:00:00",
@@ -227,8 +223,6 @@
 						{
 							"name": "Archive",
 							"type": "Copy",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "Copy data1",
@@ -319,8 +313,6 @@
 						{
 							"name": "Delete",
 							"type": "Delete",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "Archive",
@@ -372,8 +364,6 @@
 						{
 							"name": "Copy data1_copy2",
 							"type": "Copy",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [],
 							"policy": {
 								"timeout": "0.12:00:00",
@@ -452,8 +442,6 @@
 						{
 							"name": "Archive1",
 							"type": "Copy",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "If Condition1",
@@ -544,8 +532,6 @@
 						{
 							"name": "Delete1",
 							"type": "Delete",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "Archive1",
@@ -597,8 +583,6 @@
 						{
 							"name": "If Condition1",
 							"type": "IfCondition",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "Copy data1_copy2",
@@ -1053,8 +1037,6 @@
 						{
 							"name": "Archive2",
 							"type": "Copy",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "Switch1",
@@ -1145,8 +1127,6 @@
 						{
 							"name": "Delete2",
 							"type": "Delete",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "Archive2",
