@@ -40,7 +40,8 @@
 								"sink": {
 									"type": "SqlServerSink",
 									"writeBehavior": "insert",
-									"sqlWriterUseTableLock": false
+									"sqlWriterUseTableLock": false,
+									"tableOption": "autoCreate"
 								},
 								"enableStaging": false,
 								"translator": {
@@ -75,7 +76,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"Table_name": {
-											"value": "@replace(item().Name,'.csv','p_load')",
+											"value": "@replace(item().Name,'.csv','_p_load')",
 											"type": "Expression"
 										},
 										"Schema_Name": "dbo"
