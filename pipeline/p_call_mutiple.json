@@ -112,7 +112,21 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"waitOnCompletion": true
+								"pipeline": {
+									"referenceName": "p_call_multiple_db",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"p_File_Name": {
+										"value": "@activity('Get Metadata1').output.childItems",
+										"type": "Expression"
+									},
+									"p_folder_Name": {
+										"value": "@item().Folder_Name",
+										"type": "Expression"
+									}
+								}
 							}
 						}
 					]

@@ -6,9 +6,23 @@
 				"name": "ForEach1",
 				"type": "ForEach",
 				"dependsOn": [],
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.p_File_Name",
+						"type": "Expression"
+					}
+				}
 			}
 		],
+		"parameters": {
+			"p_File_Name": {
+				"type": "array"
+			},
+			"p_folder_Name": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "New_Azure"
 		},
