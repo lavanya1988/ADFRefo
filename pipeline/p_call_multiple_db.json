@@ -1,0 +1,17 @@
+{
+	"name": "p_call_multiple_db",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": []
+			}
+		],
+		"folder": {
+			"name": "New_Azure"
+		},
+		"annotations": []
+	}
+}
