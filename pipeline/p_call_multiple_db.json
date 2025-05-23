@@ -59,11 +59,11 @@
 									"parameters": {
 										"Filesystem": "data",
 										"Directory": {
-											"value": "@item().Folder_Name",
+											"value": "@pipeline().parameters.p_folder_Name",
 											"type": "Expression"
 										},
 										"Filename": {
-											"value": " ",
+											"value": "@item().Name",
 											"type": "Expression"
 										}
 									}
