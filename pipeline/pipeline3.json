@@ -40,21 +40,6 @@
 				}
 			},
 			{
-				"name": "Append variable1",
-				"type": "AppendVariable",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [],
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "v_var_list",
-					"value": {
-						"value": "@activity('Get Metadata1').output.childItems",
-						"type": "Expression"
-					}
-				}
-			},
-			{
 				"name": "ForEach1",
 				"type": "ForEach",
 				"dependsOn": [
@@ -70,13 +55,28 @@
 					"items": {
 						"value": "@activity('Get Metadata1').output.childItems",
 						"type": "Expression"
-					}
+					},
+					"activities": [
+						{
+							"name": "Append variable1_copy1",
+							"type": "AppendVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "v_var_list",
+								"value": {
+									"value": "@{item().variables('v_var_list')}",
+									"type": "Expression"
+								}
+							}
+						}
+					]
 				}
 			}
 		],
 		"variables": {
 			"v_var_list": {
-				"type": "Integer"
+				"type": "Array"
 			}
 		},
 		"folder": {
