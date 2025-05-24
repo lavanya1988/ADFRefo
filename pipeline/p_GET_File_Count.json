@@ -94,13 +94,7 @@
 									"referenceName": "p_process_file",
 									"type": "PipelineReference"
 								},
-								"waitOnCompletion": true,
-								"parameters": {
-									"p__FileName": {
-										"value": "@activity('Get Metadata1').output.childItems",
-										"type": "Expression"
-									}
-								}
+								"waitOnCompletion": true
 							}
 						}
 					]
