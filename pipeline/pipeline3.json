@@ -62,7 +62,7 @@
 		],
 		"variables": {
 			"v_var_list": {
-				"type": "Array"
+				"type": "Integer"
 			}
 		},
 		"folder": {
