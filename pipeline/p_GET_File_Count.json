@@ -82,12 +82,25 @@
 					},
 					"ifTrueActivities": [
 						{
-							"name": "Wait2",
-							"type": "Wait",
+							"name": "Execute Pipeline1",
+							"type": "ExecutePipeline",
 							"dependsOn": [],
+							"policy": {
+								"secureInput": false
+							},
 							"userProperties": [],
 							"typeProperties": {
-								"waitTimeInSeconds": 2
+								"pipeline": {
+									"referenceName": "p_process_file",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"p__FileName": {
+										"value": "@activity('Get Metadata1').output.childItems",
+										"type": "Expression"
+									}
+								}
 							}
 						}
 					]
