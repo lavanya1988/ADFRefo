@@ -88,6 +88,9 @@
 		"parameters": {
 			"p__FileName": {
 				"type": "array"
+			},
+			"p_length": {
+				"type": "array"
 			}
 		},
 		"folder": {
