@@ -59,10 +59,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"Filesystem": "data",
-										"Directory": {
-											"value": "@pipeline().parameters.p_FolderName",
-											"type": "Expression"
-										},
+										"Directory": "Input",
 										"Filename": {
 											"value": "@item().Name",
 											"type": "Expression"
