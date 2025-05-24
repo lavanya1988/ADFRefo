@@ -77,7 +77,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@equals(activity('Get Metadata1').output.childItems,)",
+						"value": "@equals(variables('v_count'),4)",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
@@ -93,29 +93,12 @@
 					],
 					"ifTrueActivities": [
 						{
-							"name": "Execute Pipeline1",
-							"type": "ExecutePipeline",
+							"name": "Wait2",
+							"type": "Wait",
 							"dependsOn": [],
-							"policy": {
-								"secureInput": false
-							},
 							"userProperties": [],
 							"typeProperties": {
-								"pipeline": {
-									"referenceName": "p_process_file",
-									"type": "PipelineReference"
-								},
-								"waitOnCompletion": true,
-								"parameters": {
-									"p__FileName": {
-										"value": "@activity('Get Metadata1').output.childItems",
-										"type": "Expression"
-									},
-									"p_length": {
-										"value": "@variables('v_count')",
-										"type": "Expression"
-									}
-								}
+								"waitTimeInSeconds": 2
 							}
 						}
 					]
