@@ -65,7 +65,7 @@
 							"typeProperties": {
 								"variableName": "v_var_list",
 								"value": {
-									"value": "@{item().variables('v_var_list')}",
+									"value": "@item().name\n",
 									"type": "Expression"
 								}
 							}
