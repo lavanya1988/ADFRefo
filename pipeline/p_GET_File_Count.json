@@ -40,8 +40,8 @@
 				}
 			},
 			{
-				"name": "ForEach1",
-				"type": "ForEach",
+				"name": "Set variable1",
+				"type": "SetVariable",
 				"dependsOn": [
 					{
 						"activity": "Get Metadata1",
@@ -50,9 +50,25 @@
 						]
 					}
 				],
-				"userProperties": []
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "v_count",
+					"value": {
+						"value": "@activity('Get Metadata1').output.childItems",
+						"type": "Expression"
+					}
+				}
 			}
 		],
+		"variables": {
+			"v_count": {
+				"type": "Integer"
+			}
+		},
 		"folder": {
 			"name": "New_Azure"
 		},
