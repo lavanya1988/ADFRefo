@@ -38,8 +38,33 @@
 						"type": "DelimitedTextReadSettings"
 					}
 				}
+			},
+			{
+				"name": "Append variable1",
+				"type": "AppendVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Metadata1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "v_var_list",
+					"value": {
+						"value": "@activity('Get Metadata1').output.childItems",
+						"type": "Expression"
+					}
+				}
 			}
 		],
+		"variables": {
+			"v_var_list": {
+				"type": "Array"
+			}
+		},
 		"folder": {
 			"name": "New_Azure"
 		},
