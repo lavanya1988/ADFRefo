@@ -42,6 +42,21 @@
 			{
 				"name": "Append variable1",
 				"type": "AppendVariable",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "v_var_list",
+					"value": {
+						"value": "@activity('Get Metadata1').output.childItems",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
 				"dependsOn": [
 					{
 						"activity": "Get Metadata1",
@@ -52,8 +67,7 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "v_var_list",
-					"value": {
+					"items": {
 						"value": "@activity('Get Metadata1').output.childItems",
 						"type": "Expression"
 					}
