@@ -108,7 +108,7 @@
 								"waitOnCompletion": true,
 								"parameters": {
 									"p__FileName": {
-										"value": "@variables('v_count')",
+										"value": "@activity('Get Metadata1').output.childItems",
 										"type": "Expression"
 									}
 								}
