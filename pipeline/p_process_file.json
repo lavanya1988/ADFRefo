@@ -129,11 +129,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"p__FileName": {
-				"type": "array"
-			}
-		},
 		"folder": {
 			"name": "New_Azure"
 		},
