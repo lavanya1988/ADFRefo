@@ -9,6 +9,11 @@
 				"userProperties": []
 			}
 		],
+		"parameters": {
+			"P_FileName": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "New_Azure"
 		},
