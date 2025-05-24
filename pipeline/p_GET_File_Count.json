@@ -80,6 +80,17 @@
 						"value": "@equals(activity('Get Metadata1').output.childItems,4)",
 						"type": "Expression"
 					},
+					"ifFalseActivities": [
+						{
+							"name": "Wait1",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
+						}
+					],
 					"ifTrueActivities": [
 						{
 							"name": "Execute Pipeline1",
