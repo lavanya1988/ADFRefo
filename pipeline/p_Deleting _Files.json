@@ -1,0 +1,48 @@
+{
+	"name": "p_Deleting _Files",
+	"properties": {
+		"activities": [
+			{
+				"name": "Delete1",
+				"type": "Delete",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ADLS_DataSet",
+						"type": "DatasetReference",
+						"parameters": {
+							"Filesystem": "data",
+							"Directory": "STAGE_AREA"
+						}
+					},
+					"enableLogging": true,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"modifiedDatetimeEnd": {
+							"value": "@adddays(utcNow(),-60)",
+							"type": "Expression"
+						},
+						"wildcardFileName": {
+							"value": "*.csv",
+							"type": "Expression"
+						},
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "New_Azure"
+		},
+		"annotations": []
+	}
+}
