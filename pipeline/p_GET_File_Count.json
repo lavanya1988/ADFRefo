@@ -58,7 +58,7 @@
 				"typeProperties": {
 					"variableName": "v_count",
 					"value": {
-						"value": "@activity('Get Metadata1').output.childItems",
+						"value": "@length(activity('Get Metadata1').output.childItems)",
 						"type": "Expression"
 					}
 				}
