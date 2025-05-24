@@ -20,7 +20,11 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"Filesystem": "data",
-							"Directory": "STAGE_AREA"
+							"Directory": "STAGE_AREA",
+							"Filename": {
+								"value": " ",
+								"type": "Expression"
+							}
 						}
 					},
 					"enableLogging": true,
