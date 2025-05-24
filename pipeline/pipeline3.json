@@ -63,7 +63,7 @@
 							"dependsOn": [],
 							"userProperties": [],
 							"typeProperties": {
-								"variableName": "v_var_list",
+								"variableName": "v_File_list",
 								"value": {
 									"value": "@item().name\n",
 									"type": "Expression"
@@ -75,7 +75,7 @@
 			}
 		],
 		"variables": {
-			"v_var_list": {
+			"v_File_list": {
 				"type": "Array"
 			}
 		},
