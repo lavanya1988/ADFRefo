@@ -1,5 +1,5 @@
 {
-	"name": "pipeline3",
+	"name": "p_Get_FileNames_Load_Array",
 	"properties": {
 		"activities": [
 			{
