@@ -77,7 +77,7 @@
 										"Filesystem": "data",
 										"Directory": "Input",
 										"Filename": {
-											"value": " ",
+											"value": "@item().Name",
 											"type": "Expression"
 										}
 									}
