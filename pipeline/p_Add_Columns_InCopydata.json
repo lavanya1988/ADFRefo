@@ -17,6 +17,16 @@
 				"typeProperties": {
 					"source": {
 						"type": "DelimitedTextSource",
+						"additionalColumns": [
+							{
+								"name": "Location",
+								"value": "'ATLANTA'"
+							},
+							{
+								"name": "HIRE_DATE",
+								"value": "utcnow()"
+							}
+						],
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
@@ -26,7 +36,21 @@
 							"type": "DelimitedTextReadSettings"
 						}
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
@@ -36,6 +60,16 @@
 							"Filesystem": "data",
 							"Directory": "Input",
 							"Filename": "samaple_data.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "SqlServerTable_master",
+						"type": "DatasetReference",
+						"parameters": {
+							"Table_name": "sample_col",
+							"Schema_Name": "dbo"
 						}
 					}
 				]
