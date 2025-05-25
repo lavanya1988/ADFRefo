@@ -20,11 +20,14 @@
 						"additionalColumns": [
 							{
 								"name": "Location",
-								"value": "'ATLANTA'"
+								"value": "ATLANTA"
 							},
 							{
 								"name": "HIRE_DATE",
-								"value": "utcnow()"
+								"value": {
+									"value": "@utcNow()",
+									"type": "Expression"
+								}
 							}
 						],
 						"storeSettings": {
