@@ -75,7 +75,11 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"Filesystem": "data",
-										"Directory": "Input"
+										"Directory": "Input",
+										"Filename": {
+											"value": " ",
+											"type": "Expression"
+										}
 									}
 								},
 								"fieldList": [
