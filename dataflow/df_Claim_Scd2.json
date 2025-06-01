@@ -26,20 +26,53 @@
 			"transformations": [
 				{
 					"name": "lookup1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "split1"
 				}
 			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          Claim_Number as string,",
+				"          Incident_Number as string,",
+				"          Claimant_Name as string,",
+				"          Climant_Address as string,",
+				"          Payment_Type as string,",
+				"          Claim_Amount as string,",
+				"          Insurance_type as string,",
+				"          Insurance_Number as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          Claim_Number as string,",
+				"          Incident_Number as string,",
+				"          Claimant_Name as string,",
+				"          Climant_Address as string,",
+				"          Payment_Type as string,",
+				"          Claim_Amount as string,",
+				"          Insurance_type as string,",
+				"          Insurance_Number as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> source2",
-				"source1, source2 lookup(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"source1, source2 lookup(source1@Claim_Number == source2@Claim_Number,",
 				"     multiple: false,",
 				"     pickup: 'any',",
-				"     broadcast: 'auto')~> lookup1"
+				"     broadcast: 'auto')~> lookup1",
+				"lookup1 derive() ~> derivedColumn1",
+				"derivedColumn1 derive() ~> derivedColumn2",
+				"derivedColumn2 split(ERROR_FUNCTION(''),",
+				"     disjoint: false) ~> split1@(, )"
 			]
 		}
 	}
