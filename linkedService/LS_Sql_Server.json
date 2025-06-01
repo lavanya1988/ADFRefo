@@ -11,7 +11,7 @@
 			"trustServerCertificate": true,
 			"authenticationType": "SQL",
 			"userName": "sa",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJmMTVlZmJkZS05N2I2LTQxNWUtOTdhNy01ODc5OTNlMTY4NWIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIyMDMyY2UwMC1lMzFlLTQxM2MtOTZiOC01N2I3NmQyZGM1ZTkiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "SelfHostedIR",
