@@ -22,7 +22,22 @@
 					"name": "source2"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSql_table",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSql_table",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
 			"transformations": [
 				{
 					"name": "lookup1"
@@ -35,6 +50,15 @@
 				},
 				{
 					"name": "select1"
+				},
+				{
+					"name": "derivedColumn3"
+				},
+				{
+					"name": "derivedColumn4"
+				},
+				{
+					"name": "alterRow1"
 				}
 			],
 			"scriptLines": [
@@ -74,8 +98,8 @@
 				"lookup1 derive(v_ins_upd = iif(isNull(source2@Claim_Number),'I',iif(:md5_src!=:md5_tgt,'U','')),",
 				"          md5_src := md5(source1@Incident_Number,source1@Claimant_Name,source1@Climant_Address,source1@Payment_Type,source1@Claim_Amount,source1@Insurance_type,source1@Insurance_Number),",
 				"          md5_tgt := md5(source2@Incident_Number,source2@Claimant_Name,source2@Climant_Address,source2@Payment_Type,source2@Claim_Amount,source2@Claim_Amount,source2@Insurance_type,source2@Insurance_Number)) ~> derivedColumn2",
-				"select1 split(ERROR_FUNCTION(''),",
-				"     ERROR_FUNCTION(''),",
+				"select1 split(v_ins_upd== 'I' || v_ins_upd== 'U',",
+				"     v_ins_upd=='U',",
 				"     disjoint: false) ~> split1@(insert, update, default)",
 				"derivedColumn2 select(mapColumn(",
 				"          Claim_Number = source1@Claim_Number,",
@@ -91,7 +115,46 @@
 				"          v_ins_upd",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"split1@insert derive(Ins_Active_Flag = 'Y') ~> derivedColumn3",
+				"split1@update derive(upd_Active_flag = 'N') ~> derivedColumn4",
+				"derivedColumn4 alterRow(updateIf(1==1)) ~> alterRow1",
+				"derivedColumn3 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Claim_Number,",
+				"          Incident_Number,",
+				"          Claimant_Name,",
+				"          Climant_Address,",
+				"          Payment_Type,",
+				"          Claim_Amount,",
+				"          Insurance_type,",
+				"          Insurance_Number,",
+				"          S_K,",
+				"          Active_Flag = Ins_Active_Flag",
+				"     )) ~> sink1",
+				"alterRow1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          S_K,",
+				"          Active_Flag = upd_Active_flag",
+				"     )) ~> sink2"
 			]
 		}
 	}
