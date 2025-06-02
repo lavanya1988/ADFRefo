@@ -1,0 +1,51 @@
+{
+	"name": "pipeline6",
+	"properties": {
+		"activities": [
+			{
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "df_Claim_Scd2",
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"source1": {
+								"Filesystem": "data",
+								"Directory": "Input",
+								"Filename": "Claim_Data.csv"
+							},
+							"source2": {
+								"schema": "hr",
+								"Table_Name": "Claim_data"
+							},
+							"sink1": {
+								"schema": "hr",
+								"Table_Name": "Claim_data"
+							},
+							"sink2": {
+								"schema": "hr",
+								"Table_Name": "Claim_data"
+							}
+						}
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
