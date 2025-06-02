@@ -28,13 +28,13 @@
 					"name": "lookup1"
 				},
 				{
-					"name": "derivedColumn1"
-				},
-				{
 					"name": "derivedColumn2"
 				},
 				{
 					"name": "split1"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -59,7 +59,9 @@
 				"          Payment_Type as string,",
 				"          Claim_Amount as string,",
 				"          Insurance_type as string,",
-				"          Insurance_Number as string",
+				"          Insurance_Number as string,",
+				"          Active_Flag as string,",
+				"          S_K as integer",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
@@ -69,10 +71,27 @@
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> lookup1",
-				"lookup1 derive() ~> derivedColumn1",
-				"derivedColumn1 derive() ~> derivedColumn2",
-				"derivedColumn2 split(ERROR_FUNCTION(''),",
-				"     disjoint: false) ~> split1@(, )"
+				"lookup1 derive(v_ins_upd = iif(isNull(source2@Claim_Number),'I',iif(:md5_src!=:md5_tgt,'U','')),",
+				"          md5_src := md5(source1@Incident_Number,source1@Claimant_Name,source1@Climant_Address,source1@Payment_Type,source1@Claim_Amount,source1@Insurance_type,source1@Insurance_Number),",
+				"          md5_tgt := md5(source2@Incident_Number,source2@Claimant_Name,source2@Climant_Address,source2@Payment_Type,source2@Claim_Amount,source2@Claim_Amount,source2@Insurance_type,source2@Insurance_Number)) ~> derivedColumn2",
+				"select1 split(ERROR_FUNCTION(''),",
+				"     ERROR_FUNCTION(''),",
+				"     disjoint: false) ~> split1@(insert, update, default)",
+				"derivedColumn2 select(mapColumn(",
+				"          Claim_Number = source1@Claim_Number,",
+				"          Incident_Number = source1@Incident_Number,",
+				"          Claimant_Name = source1@Claimant_Name,",
+				"          Climant_Address = source1@Climant_Address,",
+				"          Payment_Type = source1@Payment_Type,",
+				"          Claim_Amount = source1@Claim_Amount,",
+				"          Insurance_type = source1@Insurance_type,",
+				"          Insurance_Number = source1@Insurance_Number,",
+				"          src2_Claim_Number = source2@Claim_Number,",
+				"          S_K,",
+				"          v_ins_upd",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}
