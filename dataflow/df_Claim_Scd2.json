@@ -148,7 +148,7 @@
 				"          Claim_Amount,",
 				"          Insurance_type,",
 				"          Insurance_Number,",
-				"          S_K = S_Key,",
+				"          S_K,",
 				"          Active_Flag = Ins_Active_Flag",
 				"     )) ~> sink1",
 				"alterRow1 sink(allowSchemaDrift: true,",
