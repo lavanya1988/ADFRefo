@@ -59,6 +59,9 @@
 				},
 				{
 					"name": "alterRow1"
+				},
+				{
+					"name": "surrogateKey1"
 				}
 			],
 			"scriptLines": [
@@ -90,7 +93,8 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> source2",
+				"     query: 'select * from hr.Claim_data where Active_Flag=\\'Y\\'',",
+				"     format: 'query') ~> source2",
 				"source1, source2 lookup(source1@Claim_Number == source2@Claim_Number,",
 				"     multiple: false,",
 				"     pickup: 'any',",
@@ -100,7 +104,7 @@
 				"          md5_tgt := md5(source2@Incident_Number,source2@Claimant_Name,source2@Climant_Address,source2@Payment_Type,source2@Claim_Amount,source2@Claim_Amount,source2@Insurance_type,source2@Insurance_Number)) ~> derivedColumn2",
 				"select1 split(v_ins_upd== 'I' || v_ins_upd== 'U',",
 				"     v_ins_upd=='U',",
-				"     disjoint: false) ~> split1@(insert, update, default)",
+				"     disjoint: true) ~> split1@(insert, update, default)",
 				"derivedColumn2 select(mapColumn(",
 				"          Claim_Number = source1@Claim_Number,",
 				"          Incident_Number = source1@Incident_Number,",
@@ -116,9 +120,12 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"split1@insert derive(Ins_Active_Flag = 'Y') ~> derivedColumn3",
+				"surrogateKey1 derive(Ins_Active_Flag = 'Y') ~> derivedColumn3",
 				"split1@update derive(upd_Active_flag = 'N') ~> derivedColumn4",
 				"derivedColumn4 alterRow(updateIf(1==1)) ~> alterRow1",
+				"split1@insert keyGenerate(output({undefined} as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey1",
 				"derivedColumn3 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
