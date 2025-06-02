@@ -123,7 +123,7 @@
 				"surrogateKey1 derive(Ins_Active_Flag = 'Y') ~> derivedColumn3",
 				"split1@update derive(upd_Active_flag = 'N') ~> derivedColumn4",
 				"derivedColumn4 alterRow(updateIf(1==1)) ~> alterRow1",
-				"split1@insert keyGenerate(output({undefined} as long),",
+				"split1@insert keyGenerate(output(S_K as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey1",
 				"derivedColumn3 sink(allowSchemaDrift: true,",
