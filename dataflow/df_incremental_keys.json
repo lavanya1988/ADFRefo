@@ -33,9 +33,6 @@
 			],
 			"transformations": [
 				{
-					"name": "derivedColumn1"
-				},
-				{
 					"name": "aggregate1"
 				},
 				{
@@ -77,9 +74,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source2",
-				"source1 derive(dummy = 'dummy') ~> derivedColumn1",
-				"derivedColumn1 aggregate(groupBy(dummy),",
-				"     Max_Sno = max(SNo)) ~> aggregate1",
+				"source1 aggregate(Max_Sno = max(SNo)) ~> aggregate1",
 				"aggregate1, source2 join(1==1,",
 				"     joinType:'cross',",
 				"     matchType:'exact',",
