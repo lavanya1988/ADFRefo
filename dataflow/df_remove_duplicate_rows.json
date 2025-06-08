@@ -18,7 +18,13 @@
 			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          Emp_id as short,",
+				"          Emp_Name as string,",
+				"          Department as string,",
+				"          Salary as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1"
 			]
