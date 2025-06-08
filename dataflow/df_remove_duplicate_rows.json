@@ -17,6 +17,10 @@
 			],
 			"sinks": [
 				{
+					"dataset": {
+						"referenceName": "AzureSql_table",
+						"type": "DatasetReference"
+					},
 					"name": "sink1"
 				}
 			],
@@ -39,8 +43,14 @@
 				"     each(match(name != \"Emp_id\"), $$ = first($$))) ~> aggregate1",
 				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
 			]
 		}
 	}
