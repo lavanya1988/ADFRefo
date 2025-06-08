@@ -1,0 +1,124 @@
+{
+	"name": "df_incremental_keys_copy1",
+	"properties": {
+		"folder": {
+			"name": "New_DataFlows"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ADLS_DataSet",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				},
+				{
+					"dataset": {
+						"referenceName": "ADLS_DataSet",
+						"type": "DatasetReference"
+					},
+					"name": "source3"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSql_table",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "join1"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "surrogateKey1"
+				},
+				{
+					"name": "select2"
+				},
+				{
+					"name": "window1"
+				},
+				{
+					"name": "select3"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          SNo as short,",
+				"          EmpID as short,",
+				"          EmpName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source2",
+				"source(output(",
+				"          SNo as short,",
+				"          EmpID as short,",
+				"          EmpName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source3",
+				"window1, source2 join(source3@SNo == source2@SNo,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"surrogateKey1 derive(S_K = Max_Sno_+source3@SNo) ~> derivedColumn2",
+				"derivedColumn2 select(mapColumn(",
+				"          SNo = source2@SNo,",
+				"          EmpID = source2@EmpID,",
+				"          EmpName = source2@EmpName,",
+				"          S_K",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select3 keyGenerate(output(S_K as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey1",
+				"select1 select(mapColumn(",
+				"          SNo,",
+				"          EmpID,",
+				"          EmpName,",
+				"          S_Key",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"source3 window(Max_Sno = max(SNo)) ~> window1",
+				"join1 select(mapColumn(",
+				"          SNo_J = source3@SNo,",
+				"          EmpID_J = source3@EmpID,",
+				"          EmpName_J = source3@EmpName,",
+				"          Max_Sno_ = Max_Sno,",
+				"          SNo = source2@SNo,",
+				"          EmpID = source2@EmpID,",
+				"          EmpName = source2@EmpName",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select3",
+				"select2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+			]
+		}
+	}
+}
