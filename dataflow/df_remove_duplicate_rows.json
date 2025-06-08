@@ -1,5 +1,5 @@
 {
-	"name": "df_remove_dup_rows_using _agg_trf",
+	"name": "df_remove_duplicate_rows",
 	"properties": {
 		"folder": {
 			"name": "New_DataFlows"
