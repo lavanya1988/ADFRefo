@@ -23,6 +23,18 @@
 								"Filesystem": "data",
 								"Directory": "Input",
 								"Filename": "sample_data.csv"
+							},
+							"sink1": {
+								"schema": "hr",
+								"Table_Name": "Remove_dup_rows"
+							}
+						},
+						"linkedServiceParameters": {
+							"sink1": {
+								"schemaLinkedService": {
+									"schema": "hr",
+									"Table_Name": "Remove_dup_rows"
+								}
 							}
 						}
 					},
