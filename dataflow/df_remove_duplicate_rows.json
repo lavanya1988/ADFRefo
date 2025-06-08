@@ -15,7 +15,11 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "aggregate1"
@@ -32,8 +36,11 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
 				"source1 aggregate(groupBy(Emp_id),",
-				"     column1 = ERROR_FUNCTION(''),",
-				"          each(match(name != \"Emp_ID\"), ERROR_FUNCTION('') = ERROR_FUNCTION(''))) ~> aggregate1"
+				"     each(match(name != \"Emp_id\"), $$ = first($$))) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
