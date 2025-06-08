@@ -1,0 +1,108 @@
+{
+	"name": "df_incremental_keys",
+	"properties": {
+		"folder": {
+			"name": "New_DataFlows"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ADLS_DataSet",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "ADLS_DataSet",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSql_table",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "aggregate1"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "union1"
+				},
+				{
+					"name": "surrogateKey1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          SNo as short,",
+				"          EmpID as short,",
+				"          EmpName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source(output(",
+				"          SNo as short,",
+				"          EmpID as short,",
+				"          EmpName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source2",
+				"source1 derive(dummy = 'dummy') ~> derivedColumn1",
+				"derivedColumn1 aggregate(groupBy(dummy),",
+				"     Max_Sno = max(SNo)) ~> aggregate1",
+				"aggregate1, source2 join(1==1,",
+				"     joinType:'cross',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"surrogateKey1 derive(S_K = iif(isNull(S_K),SNo,Max_Sno+SNo)) ~> derivedColumn2",
+				"derivedColumn2 select(mapColumn(",
+				"          SNo,",
+				"          EmpID,",
+				"          EmpName,",
+				"          S_K",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"source1, select1 union(byName: true)~> union1",
+				"join1 keyGenerate(output(S_K as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey1",
+				"union1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+			]
+		}
+	}
+}
