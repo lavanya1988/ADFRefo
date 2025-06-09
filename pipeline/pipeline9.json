@@ -27,7 +27,7 @@
 							"source2": {
 								"Filesystem": "data",
 								"Directory": "Input",
-								"Filename": "Emp2.csv"
+								"Filename": "Emp2_copy.csv"
 							},
 							"sink1": {
 								"schema": "hr",
