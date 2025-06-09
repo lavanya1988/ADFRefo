@@ -59,7 +59,7 @@
 			],
 			"scriptLines": [
 				"source(output(",
-				"          SNo as short,",
+				"          SNo as integer,",
 				"          EmpID as short,",
 				"          EmpName as string",
 				"     ),",
