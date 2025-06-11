@@ -16,16 +16,16 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "df_Flatten_Trf",
+						"referenceName": "df_convert_Single_row",
 						"type": "DataFlowReference",
 						"datasetParameters": {
 							"source1": {
 								"schema": "hr",
-								"Table_Name": "FLATTEN_TRANSFORMATION"
+								"Table_Name": "Flatten_multiple_rows"
 							},
 							"sink1": {
 								"schema": "hr",
-								"Table_Name": "Flatten_multiple_rows"
+								"Table_Name": "Emp_Insurence"
 							}
 						}
 					},
