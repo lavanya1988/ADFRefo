@@ -57,7 +57,10 @@
 						"parameters": {
 							"Filesystem": "data",
 							"Directory": "Input_copy",
-							"Filename": " "
+							"Filename": {
+								"value": "  ",
+								"type": "Expression"
+							}
 						}
 					}
 				],
