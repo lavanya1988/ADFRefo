@@ -92,7 +92,7 @@
 				"derivedColumn2, source2 lookup(source1@PROMOTION_ID == source2@PROMOTION_ID,",
 				"     multiple: true,",
 				"     broadcast: 'auto')~> lookup1",
-				"lookup1 derive(Src_Md5 = ERROR_FUNCTION('derivedColumn2@START_DATEmd5(concat(source1@PROMOTION_NAME,source1@PROMOTION_TYPE,toString(toDecimal(derivedColumn2@DISCOUNT_AMOUNT,5,2)),derivedColumn2@START_DATE,derivedColumn2@END_DATE ))'),",
+				"lookup1 derive(Src_Md5 = md5(concat(source1@PROMOTION_NAME,source1@PROMOTION_TYPE,toString(toDecimal(derivedColumn2@DISCOUNT_AMOUNT,5,2)),derivedColumn2@START_DATE,derivedColumn2@END_DATE )),",
 				"          Tgt_Md5 = md5(concat(source2@PROMOTION_NAME,source2@PROMOTION_TYPE,toString(source2@DISCOUNT_AMOUNT),toString(source2@START_DATE,'yyyy-MM-dd'),toString(source2@END_DATE,'yyyy-MM-dd'))),",
 				"          STG_CREATE_DATE = currentDate()) ~> derivedColumn1",
 				"derivedColumn1 filter(Src_Md5!=Tgt_Md5) ~> filter1",
