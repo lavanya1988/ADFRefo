@@ -63,7 +63,7 @@
 				"     errors: true) ~> cast1",
 				"cast1 aggregate(groupBy(DEPARTMENT_ID),",
 				"     Avg_salary = round(avg(SALARY),2),",
-				"     partitionBy('hash', 2,",
+				"     partitionBy('fixed', 2,",
 				"          ERROR_FUNCTION('')",
 				"     )) ~> aggregate1",
 				"aggregate1, cast1 join(aggregate1@DEPARTMENT_ID == cast1@DEPARTMENT_ID,",
