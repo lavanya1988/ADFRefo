@@ -1,0 +1,12 @@
+{
+	"name": "SqlServertable_2017",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SqlServer2017",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	}
+}
