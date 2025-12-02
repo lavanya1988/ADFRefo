@@ -18,6 +18,10 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": {
+				"value": "@dataset().Schema_Name",
+				"type": "Expression"
+			},
+			"table": {
 				"value": "@dataset().Table_name",
 				"type": "Expression"
 			}
