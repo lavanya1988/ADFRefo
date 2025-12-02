@@ -5,8 +5,22 @@
 			"referenceName": "LS_SqlServer2017",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"Schema_Name": {
+				"type": "string"
+			},
+			"Table_name": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "SqlServerTable",
-		"schema": []
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().Table_name",
+				"type": "Expression"
+			}
+		}
 	}
 }
