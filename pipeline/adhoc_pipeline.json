@@ -48,7 +48,7 @@
 						"parameters": {
 							"Filesystem": "source",
 							"Filedirectory": "SQL",
-							"Filename": "encounters.csv"
+							"Filename": "provider.csv"
 						}
 					}
 				],
@@ -58,7 +58,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"Schema_Name": "dbo",
-							"Table_name": "Encounters"
+							"Table_name": "Providers"
 						}
 					}
 				]
