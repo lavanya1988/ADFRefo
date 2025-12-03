@@ -33,7 +33,8 @@
 						"referenceName": "adls_data",
 						"type": "DatasetReference",
 						"parameters": {
-							"Filesystem": "source"
+							"Filesystem": "source",
+							"Filedirectory": "SQL"
 						}
 					}
 				]
