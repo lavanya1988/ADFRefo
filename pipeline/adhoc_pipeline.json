@@ -48,7 +48,7 @@
 						"parameters": {
 							"Filesystem": "source",
 							"Filedirectory": "SQL",
-							"Filename": "departments.csv"
+							"Filename": "encounters.csv"
 						}
 					}
 				],
@@ -57,8 +57,7 @@
 						"referenceName": "SqlServertable_2017",
 						"type": "DatasetReference",
 						"parameters": {
-							"Schema_Name": "dbo",
-							"Table_name": "Departments"
+							"Schema_Name": "dbo"
 						}
 					}
 				]
