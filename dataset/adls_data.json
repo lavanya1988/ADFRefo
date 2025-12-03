@@ -5,6 +5,17 @@
 			"referenceName": "Linkservicegen2",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"Filesystem": {
+				"type": "string"
+			},
+			"Filedirectory": {
+				"type": "string"
+			},
+			"Filename": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "ins_project"
 		},
