@@ -48,7 +48,7 @@
 						"parameters": {
 							"Filesystem": "source",
 							"Filedirectory": "SQL",
-							"Filename": "provider.csv"
+							"Filename": "patients.csv"
 						}
 					}
 				],
