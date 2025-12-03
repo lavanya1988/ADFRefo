@@ -58,7 +58,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"Schema_Name": "dbo",
-							"Table_name": "Providers"
+							"Table_name": "Patients"
 						}
 					}
 				]
