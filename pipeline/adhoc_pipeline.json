@@ -57,7 +57,8 @@
 						"referenceName": "SqlServertable_2017",
 						"type": "DatasetReference",
 						"parameters": {
-							"Schema_Name": "dbo"
+							"Schema_Name": "dbo",
+							"Table_name": "Encounters"
 						}
 					}
 				]
