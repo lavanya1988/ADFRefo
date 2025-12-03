@@ -26,7 +26,20 @@
 							"type": "DelimitedTextReadSettings"
 						}
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
@@ -36,6 +49,16 @@
 							"Filesystem": "source",
 							"Filedirectory": "SQL",
 							"Filename": "departments.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "SqlServertable_2017",
+						"type": "DatasetReference",
+						"parameters": {
+							"Schema_Name": "dbo",
+							"Table_name": "Departments"
 						}
 					}
 				]
