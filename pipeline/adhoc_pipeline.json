@@ -34,7 +34,8 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"Filesystem": "source",
-							"Filedirectory": "SQL"
+							"Filedirectory": "SQL",
+							"Filename": "departments.csv"
 						}
 					}
 				]
