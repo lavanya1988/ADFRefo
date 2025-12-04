@@ -164,7 +164,8 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"Filesystem": "landing-zone",
-										"Directory": "Output/SQLServer/"
+										"Directory": "Output/SQLServer/",
+										"Filename": "@concat(item().SOURCE_TABLE,'.csv' )"
 									}
 								}
 							]
