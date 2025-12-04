@@ -145,10 +145,7 @@
 							"outputs": [
 								{
 									"referenceName": "adls_data",
-									"type": "DatasetReference",
-									"parameters": {
-										"Filesystem": "la"
-									}
+									"type": "DatasetReference"
 								}
 							]
 						},
