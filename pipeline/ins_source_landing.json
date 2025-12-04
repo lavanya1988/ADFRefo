@@ -128,11 +128,11 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"Filesystem": {
-											"value": "@item().source",
+											"value": "source",
 											"type": "Expression"
 										},
 										"Filedirectory": {
-											"value": "@item().SRCFiles",
+											"value": "SRCFiles",
 											"type": "Expression"
 										},
 										"Filename": {
