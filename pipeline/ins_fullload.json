@@ -1,5 +1,5 @@
 {
-	"name": "pipeline12",
+	"name": "ins_fullload",
 	"properties": {
 		"activities": [
 			{
