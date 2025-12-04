@@ -156,7 +156,26 @@
 										"type": "DelimitedTextReadSettings"
 									}
 								},
-								"enableStaging": false
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
 							},
 							"inputs": [
 								{
@@ -167,6 +186,12 @@
 										"Directory": "Output/SQLServer/",
 										"Filename": "@concat(item().SOURCE_TABLE,'.csv' )"
 									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "adls_zip",
+									"type": "DatasetReference"
 								}
 							]
 						}
