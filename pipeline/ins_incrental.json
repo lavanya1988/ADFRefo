@@ -225,7 +225,7 @@
 							},
 							"userProperties": [],
 							"linkedServiceName": {
-								"referenceName": "LS_SqlServer2017",
+								"referenceName": "AzureSqlDatabase1",
 								"type": "LinkedServiceReference"
 							},
 							"typeProperties": {
