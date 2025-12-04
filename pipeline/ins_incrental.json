@@ -232,7 +232,10 @@
 								"scripts": [
 									{
 										"type": "Query",
-										"text": "\nupdate metadata.control_table set WATERMARK_COL_VAL='@{utcNow()}' where SOURCE_SCHEMA='@{item().SOURCE_SCHEMA}' and SOURCE_TABLE='@{item().SOURCE_TABLE}'"
+										"text": {
+											"value": "\nupdate metadata.control_table set WATERMARK_COL_VAL='@  formatDateTime(utcNow(), 'yyyy-MM-dd HH:mm:ss'),}' where SOURCE_SCHEMA='@{item().SOURCE_SCHEMA}' and SOURCE_TABLE='@{item().SOURCE_TABLE}'",
+											"type": "Expression"
+										}
 									}
 								],
 								"scriptBlockExecutionTimeout": "02:00:00"
