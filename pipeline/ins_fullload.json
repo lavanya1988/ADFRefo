@@ -193,7 +193,8 @@
 									"referenceName": "adls_zip",
 									"type": "DatasetReference",
 									"parameters": {
-										"File_system": "archive"
+										"File_system": "archive",
+										"Directory": "Output/SQLServer/"
 									}
 								}
 							]
