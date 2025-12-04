@@ -54,7 +54,7 @@
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@or(\r\n    or(equals(item().name, 'Value1'), equals(item().name, 'Value2')),\r\n    equals(item().name, 'Value3')\r\n)\r\n",
+						"value": "@or(\n    or(equals(item().name, 'cptcodes.csv'), equals(item().name, 'ICD_code_data.csv')),\n    equals(item().name, 'NPI_data.csv')\n)\n",
 						"type": "Expression"
 					}
 				}
