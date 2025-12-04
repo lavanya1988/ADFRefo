@@ -19,10 +19,14 @@
 						"referenceName": "ADLS_DataSet",
 						"type": "DatasetReference",
 						"parameters": {
-							"Filesystem": "Source"
+							"Filesystem": "Source",
+							"Directory": "SRCFiles",
+							"Filename": " "
 						}
 					},
-					"fieldList": [],
+					"fieldList": [
+						"childItems"
+					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
 						"enablePartitionDiscovery": false
