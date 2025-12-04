@@ -17,7 +17,12 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "adls_data",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Filesystem": "source",
+							"Filedirectory": "SRCFiles",
+							"Filename": " "
+						}
 					},
 					"fieldList": [
 						"childItems"
