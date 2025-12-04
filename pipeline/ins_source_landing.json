@@ -195,7 +195,9 @@
 									"referenceName": "adls_data",
 									"type": "DatasetReference",
 									"parameters": {
-										"Filesystem": "landing-zone"
+										"Filesystem": "landing-zone",
+										"Filedirectory": "Output/SQLServer",
+										"Filename": "@item().name"
 									}
 								}
 							]
