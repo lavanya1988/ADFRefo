@@ -183,7 +183,7 @@
 										"Filesystem": "landing-zone",
 										"Directory": "Output/SQLServer/",
 										"Filename": {
-											"value": "@concat(replace(item().SOURCE_TABLE,'','.csv'),utcNow(),'.gzip')",
+											"value": "@concat(item().SOURCE_TABLE, '.csv_', utcNow(), '.gzip')\n",
 											"type": "Expression"
 										}
 									}
