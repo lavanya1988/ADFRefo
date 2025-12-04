@@ -52,6 +52,10 @@
 					"items": {
 						"value": "@activity('Get Metadata1').output.childItems",
 						"type": "Expression"
+					},
+					"condition": {
+						"value": "@or(\r\n    or(equals(item().name, 'Value1'), equals(item().name, 'Value2')),\r\n    equals(item().name, 'Value3')\r\n)\r\n",
+						"type": "Expression"
 					}
 				}
 			}
