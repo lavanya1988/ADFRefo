@@ -148,7 +148,11 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"Filesystem": "landing-zone",
-										"Filedirectory": "Output/SQLServer"
+										"Filedirectory": "Output/SQLServer",
+										"Filename": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
 									}
 								}
 							]
@@ -173,8 +177,28 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "AzureBlobFSReadSettings",
+										"recursive": true,
+										"enablePartitionDiscovery": false
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
 								"enableStaging": false
-							}
+							},
+							"inputs": [
+								{
+									"referenceName": "adls_data",
+									"type": "DatasetReference",
+									"parameters": {
+										"Filesystem": "landing-zone"
+									}
+								}
+							]
 						}
 					]
 				}
