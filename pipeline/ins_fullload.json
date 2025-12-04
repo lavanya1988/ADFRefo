@@ -191,7 +191,10 @@
 							"outputs": [
 								{
 									"referenceName": "adls_zip",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"File_system": "archive"
+									}
 								}
 							]
 						}
