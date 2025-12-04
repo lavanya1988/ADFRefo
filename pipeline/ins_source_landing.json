@@ -226,7 +226,11 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"File_system": "archive",
-										"Directory": "Output/SQLServer"
+										"Directory": "Output/SQLServer",
+										"filename": {
+											"value": "@concat(item().name,utcNow(),'.gzip')",
+											"type": "Expression"
+										}
 									}
 								}
 							]
