@@ -108,7 +108,10 @@
 									"referenceName": "adls_data",
 									"type": "DatasetReference",
 									"parameters": {
-										"Filesystem": "source"
+										"Filesystem": {
+											"value": "@item().source",
+											"type": "Expression"
+										}
 									}
 								}
 							]
