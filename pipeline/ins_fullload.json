@@ -114,6 +114,10 @@
 										"Directory": {
 											"value": "Output/SQLServer/",
 											"type": "Expression"
+										},
+										"Filename": {
+											"value": "@concat(item().SOURCE_TABLE,'.csv' )",
+											"type": "Expression"
 										}
 									}
 								}
@@ -122,6 +126,8 @@
 						{
 							"name": "Copy data2",
 							"type": "Copy",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "Copy data1",
