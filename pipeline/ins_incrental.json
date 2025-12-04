@@ -224,8 +224,16 @@
 								"secureInput": false
 							},
 							"userProperties": [],
+							"linkedServiceName": {
+								"referenceName": "LS_Sql_Server",
+								"type": "LinkedServiceReference"
+							},
 							"typeProperties": {
-								"scripts": [],
+								"scripts": [
+									{
+										"type": "Query"
+									}
+								],
 								"scriptBlockExecutionTimeout": "02:00:00"
 							}
 						}
