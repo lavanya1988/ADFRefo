@@ -73,7 +73,13 @@
 							"inputs": [
 								{
 									"referenceName": "SqlServertable_2017",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"Schema_Name": {
+											"value": "@item().SOURCE_SCHEMA",
+											"type": "Expression"
+										}
+									}
 								}
 							]
 						},
