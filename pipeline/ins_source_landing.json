@@ -1,0 +1,9 @@
+{
+	"name": "ins_source_landing",
+	"properties": {
+		"folder": {
+			"name": "ins_project"
+		},
+		"annotations": []
+	}
+}
