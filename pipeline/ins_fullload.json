@@ -63,8 +63,19 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
+								"source": {
+									"type": "SqlServerSource",
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
 								"enableStaging": false
-							}
+							},
+							"inputs": [
+								{
+									"referenceName": "SqlServertable_2017",
+									"type": "DatasetReference"
+								}
+							]
 						},
 						{
 							"name": "Copy data2",
