@@ -111,6 +111,14 @@
 										"Filesystem": {
 											"value": "@item().source",
 											"type": "Expression"
+										},
+										"Filedirectory": {
+											"value": "@item().SRCFiles",
+											"type": "Expression"
+										},
+										"Filename": {
+											"value": "@item().name",
+											"type": "Expression"
 										}
 									}
 								}
@@ -119,7 +127,14 @@
 						{
 							"name": "Copy data2",
 							"type": "Copy",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "Copy data1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "0.12:00:00",
 								"retry": 0,
