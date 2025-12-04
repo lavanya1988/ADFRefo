@@ -225,7 +225,7 @@
 							},
 							"userProperties": [],
 							"linkedServiceName": {
-								"referenceName": "LS_Sql_Server",
+								"referenceName": "LS_SqlServer2017",
 								"type": "LinkedServiceReference"
 							},
 							"typeProperties": {
