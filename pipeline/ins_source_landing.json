@@ -145,7 +145,10 @@
 							"outputs": [
 								{
 									"referenceName": "adls_data",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"Filesystem": "landing-zone"
+									}
 								}
 							]
 						},
