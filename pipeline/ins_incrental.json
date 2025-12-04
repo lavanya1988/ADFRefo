@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from  metadata.control_table where IS_ACTIVE='Y' and  LOAD_TYPE ='FULL'",
+						"sqlReaderQuery": "select * from  metadata.control_table where IS_ACTIVE='Y' and  LOAD_TYPE =''INCREMENTAL'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
