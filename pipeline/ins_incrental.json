@@ -233,7 +233,7 @@
 									{
 										"type": "Query",
 										"text": {
-											"value": "\nupdate metadata.control_table set WATERMARK_COL_VAL='@  formatDateTime(utcNow(), 'yyyy-MM-dd HH:mm:ss'),}' where SOURCE_SCHEMA='@{item().SOURCE_SCHEMA}' and SOURCE_TABLE='@{item().SOURCE_TABLE}'",
+											"value": "@concat(\n  'update metadata.control_table set WATERMARK_COL_VAL = ''',\n  formatDateTime(utcNow(), 'yyyy-MM-dd HH:mm:ss'),\n  ''' where SOURCE_SCHEMA = ''',\n  item().SOURCE_SCHEMA,\n  ''' and SOURCE_TABLE = ''',\n  item().SOURCE_TABLE,\n  ''''\n)\n",
 											"type": "Expression"
 										}
 									}
