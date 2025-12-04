@@ -161,7 +161,11 @@
 							"inputs": [
 								{
 									"referenceName": "ADLS_DataSet",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"Filesystem": "landing-zone",
+										"Directory": "Output/SQLServer/"
+									}
 								}
 							]
 						}
