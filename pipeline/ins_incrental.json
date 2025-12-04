@@ -231,7 +231,8 @@
 							"typeProperties": {
 								"scripts": [
 									{
-										"type": "Query"
+										"type": "Query",
+										"text": "\nupdate metadata.control_table set WATERMARK_COL_VAL='@{utcNow()}' where SOURCE_SCHEMA='@{item().SOURCE_SCHEMA}' and SOURCE_TABLE='@{item().SOURCE_TABLE}'"
 									}
 								],
 								"scriptBlockExecutionTimeout": "02:00:00"
