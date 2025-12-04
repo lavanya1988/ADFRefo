@@ -110,7 +110,11 @@
 									"referenceName": "ADLS_DataSet",
 									"type": "DatasetReference",
 									"parameters": {
-										"Filesystem": "landing-zone"
+										"Filesystem": "landing-zone",
+										"Directory": {
+											"value": "Output/SQLServer/",
+											"type": "Expression"
+										}
 									}
 								}
 							]
