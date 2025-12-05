@@ -1,0 +1,9 @@
+{
+	"name": "ins_claim_fullload",
+	"properties": {
+		"folder": {
+			"name": "ins_project"
+		},
+		"annotations": []
+	}
+}
