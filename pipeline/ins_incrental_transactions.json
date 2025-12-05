@@ -51,94 +51,9 @@
 					},
 					"activities": [
 						{
-							"name": "Copy data1",
-							"type": "Copy",
-							"dependsOn": [
-								{
-									"activity": "Copy data1_copy1",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"source": {
-									"type": "SqlServerSource",
-									"sqlReaderQuery": "select * from @{item().source_schema}.@{item().source_table}\nwhere @{item().WATERMARK_COL_NAME} >'@{item().WATERMARK_COL_VAL}'",
-									"queryTimeout": "02:00:00",
-									"partitionOption": "None"
-								},
-								"sink": {
-									"type": "DelimitedTextSink",
-									"storeSettings": {
-										"type": "AzureBlobFSWriteSettings"
-									},
-									"formatSettings": {
-										"type": "DelimitedTextWriteSettings",
-										"quoteAllText": true,
-										"fileExtension": ".txt"
-									}
-								},
-								"enableStaging": false,
-								"translator": {
-									"type": "TabularTranslator",
-									"typeConversion": true,
-									"typeConversionSettings": {
-										"allowDataTruncation": true,
-										"treatBooleanAsNumber": false
-									}
-								}
-							},
-							"inputs": [
-								{
-									"referenceName": "SqlServertable_2017",
-									"type": "DatasetReference",
-									"parameters": {
-										"Schema_Name": "@item().SOURCE_SCHEMA",
-										"Table_name": {
-											"value": "@item().SOURCE_TABLE",
-											"type": "Expression"
-										}
-									}
-								}
-							],
-							"outputs": [
-								{
-									"referenceName": "ADLS_DataSet",
-									"type": "DatasetReference",
-									"parameters": {
-										"Filesystem": "landing-zone",
-										"Directory": {
-											"value": "Output/SQLServer/",
-											"type": "Expression"
-										},
-										"Filename": {
-											"value": "@concat(item().SOURCE_TABLE,'.csv' )",
-											"type": "Expression"
-										}
-									}
-								}
-							]
-						},
-						{
 							"name": "Copy data2",
 							"type": "Copy",
-							"dependsOn": [
-								{
-									"activity": "Copy data1",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
+							"dependsOn": [],
 							"policy": {
 								"timeout": "0.12:00:00",
 								"retry": 0,
