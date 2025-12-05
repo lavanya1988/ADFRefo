@@ -64,11 +64,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"source": {
-									"type": "SqlServerSource",
-									"sqlReaderQuery": {
-										"value": "select * from @{item().source_schema}.@{item().source_table}\nwhere @{item().WATERMARK_COL_NAME} > '@{item().WATERMARK_COL_VAL}'",
-										"type": "Expression"
-									},
+									"type": "AzureSqlSource",
 									"queryTimeout": "02:00:00",
 									"partitionOption": "None"
 								},
@@ -95,17 +91,11 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "SqlServertable_2017",
+									"referenceName": "AzureSql_table",
 									"type": "DatasetReference",
 									"parameters": {
-										"Schema_Name": {
-											"value": "@item().SOURCE_SCHEMA",
-											"type": "Expression"
-										},
-										"Table_name": {
-											"value": "@item().SOURCE_TABLE",
-											"type": "Expression"
-										}
+										"schema": "@item().SOURCE_SCHEMA",
+										"Table_Name": "@item().SOURCE_TABLE"
 									}
 								}
 							],
