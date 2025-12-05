@@ -64,7 +64,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"source": {
-									"type": "SqlServerSource",
+									"type": "AzureSqlSource",
 									"queryTimeout": "02:00:00",
 									"partitionOption": "None"
 								},
@@ -91,18 +91,8 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "SqlServertable_2017",
-									"type": "DatasetReference",
-									"parameters": {
-										"Schema_Name": {
-											"value": "@item().SOURCE_SCHEMA",
-											"type": "Expression"
-										},
-										"Table_name": {
-											"value": "@item().SOURCE_TABLE",
-											"type": "Expression"
-										}
-									}
+									"referenceName": "AzureSql_table",
+									"type": "DatasetReference"
 								}
 							],
 							"outputs": [
