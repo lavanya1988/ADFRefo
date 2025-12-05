@@ -101,7 +101,11 @@
 									"referenceName": "SqlServertable_2017",
 									"type": "DatasetReference",
 									"parameters": {
-										"Schema_Name": "@item().SOURCE_SCHEMA"
+										"Schema_Name": "@item().SOURCE_SCHEMA",
+										"Table_name": {
+											"value": "@item().SOURCE_TABLE",
+											"type": "Expression"
+										}
 									}
 								}
 							],
