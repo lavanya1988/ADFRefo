@@ -58,7 +58,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"schema": "dbo",
-							"Table_Name": "Claims"
+							"Table_Name": "transactions"
 						}
 					}
 				]
