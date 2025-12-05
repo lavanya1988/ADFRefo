@@ -33,7 +33,9 @@
 						"referenceName": "ADLS_DataSet",
 						"type": "DatasetReference",
 						"parameters": {
-							"Filesystem": "source"
+							"Filesystem": "source",
+							"Directory": "AzureSql",
+							"Filename": "claims.csv"
 						}
 					}
 				]
