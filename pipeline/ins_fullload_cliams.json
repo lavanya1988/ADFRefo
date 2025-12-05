@@ -92,7 +92,10 @@
 							"inputs": [
 								{
 									"referenceName": "AzureSql_table",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"schema": "@item().SOURCE_SCHEMA"
+									}
 								}
 							],
 							"outputs": [
