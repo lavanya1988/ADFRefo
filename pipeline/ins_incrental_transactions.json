@@ -53,8 +53,6 @@
 						{
 							"name": "Copy data1",
 							"type": "Copy",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "Copy data1_copy1",
@@ -73,7 +71,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"source": {
-									"type": "AzureSqlSource",
+									"type": "SqlServerSource",
 									"queryTimeout": "02:00:00",
 									"partitionOption": "None"
 								},
@@ -100,12 +98,8 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "AzureSql_table",
-									"type": "DatasetReference",
-									"parameters": {
-										"schema": "@item().SOURCE_SCHEMA",
-										"Table_Name": "@item().SOURCE_TABLE"
-									}
+									"referenceName": "SqlServertable_2017",
+									"type": "DatasetReference"
 								}
 							],
 							"outputs": [
