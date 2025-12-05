@@ -258,6 +258,7 @@
 							"typeProperties": {
 								"source": {
 									"type": "AzureSqlSource",
+									"sqlReaderQuery": "select * from @{item().source_schema}.@{item().source_table}\nwhere @{item().WATERMARK_COL_NAME} > '@{item().WATERMARK_COL_VAL}",
 									"queryTimeout": "02:00:00",
 									"partitionOption": "None"
 								},
@@ -285,7 +286,11 @@
 							"inputs": [
 								{
 									"referenceName": "AzureSql_table",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"schema": "@item().SOURCE_SCHEMA",
+										"Table_Name": "@item().SOURCE_TABLE"
+									}
 								}
 							],
 							"outputs": [
