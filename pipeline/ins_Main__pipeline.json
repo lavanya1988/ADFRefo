@@ -1,5 +1,5 @@
 {
-	"name": "ins_Main_",
+	"name": "ins_Main__pipeline",
 	"properties": {
 		"activities": [
 			{
@@ -11,6 +11,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ins_fullload",
+						"type": "PipelineReference"
+					},
 					"waitOnCompletion": true
 				}
 			},
