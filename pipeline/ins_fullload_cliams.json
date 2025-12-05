@@ -94,7 +94,11 @@
 									"referenceName": "AzureSql_table",
 									"type": "DatasetReference",
 									"parameters": {
-										"schema": "@item().SOURCE_SCHEMA"
+										"schema": "@item().SOURCE_SCHEMA",
+										"Table_Name": {
+											"value": "@item().SOURCE_TABLE",
+											"type": "Expression"
+										}
 									}
 								}
 							],
