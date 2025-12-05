@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "select * from  metadata.control_table where IS_ACTIVE='Y' and  LOAD_TYPE ='INCREMENTAL'",
+						"sqlReaderQuery": "select * from  metadata.control_table where IS_ACTIVE='Y' and  LOAD_TYPE ='INCREMENTAL' and SOURCE_SYSTEM='SAP'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -35,7 +35,14 @@
 			{
 				"name": "ForEach1",
 				"type": "ForEach",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
