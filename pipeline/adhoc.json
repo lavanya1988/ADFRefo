@@ -1,5 +1,5 @@
 {
-	"name": "pipeline12",
+	"name": "adhoc",
 	"properties": {
 		"activities": [
 			{
@@ -26,7 +26,20 @@
 							"type": "DelimitedTextReadSettings"
 						}
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
@@ -36,6 +49,16 @@
 							"Filesystem": "source",
 							"Directory": "AzureSql",
 							"Filename": "claims.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSql_table",
+						"type": "DatasetReference",
+						"parameters": {
+							"schema": "dbo",
+							"Table_Name": "Claims"
 						}
 					}
 				]
