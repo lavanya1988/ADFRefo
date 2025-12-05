@@ -252,7 +252,13 @@
 						]
 					}
 				],
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@equals(activity('Lookup1').output.firstRow.TableExists, 0)",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"folder": {
