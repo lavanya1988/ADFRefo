@@ -21,12 +21,23 @@
 			{
 				"name": "Execute Pipeline2",
 				"type": "ExecutePipeline",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Execute Pipeline1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"secureInput": false
 				},
 				"userProperties": [],
 				"typeProperties": {
+					"pipeline": {
+						"referenceName": "ins_incrental",
+						"type": "PipelineReference"
+					},
 					"waitOnCompletion": true
 				}
 			}
