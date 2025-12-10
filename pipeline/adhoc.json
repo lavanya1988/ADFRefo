@@ -27,7 +27,7 @@
 						}
 					},
 					"sink": {
-						"type": "AzureSqlSink",
+						"type": "SqlServerSink",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
@@ -54,11 +54,11 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AzureSql_table",
+						"referenceName": "SqlServertable_2017",
 						"type": "DatasetReference",
 						"parameters": {
-							"schema": "dbo",
-							"Table_Name": "Claims"
+							"Schema_Name": "dbo",
+							"Table_name": "claims"
 						}
 					}
 				]
