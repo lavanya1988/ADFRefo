@@ -48,7 +48,7 @@
 						"parameters": {
 							"Filesystem": "source",
 							"Directory": "AzureSql",
-							"Filename": "claims.csv"
+							"Filename": "transactions.csv"
 						}
 					}
 				],
@@ -58,7 +58,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"Schema_Name": "dbo",
-							"Table_name": "claims"
+							"Table_name": "transactions"
 						}
 					}
 				]
