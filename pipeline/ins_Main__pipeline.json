@@ -128,10 +128,12 @@
 						"referenceName": "ADLS_DataSet",
 						"type": "DatasetReference",
 						"parameters": {
-							"Filesystem": "archive"
+							"Filesystem": "archive",
+							"Directory": "Output/SQLServer/",
+							"Filename": " "
 						}
 					},
-					"enableLogging": true,
+					"enableLogging": false,
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
 						"recursive": true,
