@@ -125,8 +125,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "adls_data",
-						"type": "DatasetReference"
+						"referenceName": "ADLS_DataSet",
+						"type": "DatasetReference",
+						"parameters": {
+							"Filename": " "
+						}
 					},
 					"enableLogging": false,
 					"storeSettings": {
