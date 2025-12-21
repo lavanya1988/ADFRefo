@@ -17,29 +17,6 @@
 					},
 					"waitOnCompletion": true
 				}
-			},
-			{
-				"name": "Execute Pipeline2",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "Execute Pipeline1",
-						"dependencyConditions": [
-							"Skipped"
-						]
-					}
-				],
-				"policy": {
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "ins_incrental",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
-				}
 			}
 		],
 		"folder": {
