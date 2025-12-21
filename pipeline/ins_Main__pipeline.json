@@ -128,13 +128,7 @@
 						"referenceName": "adls_data",
 						"type": "DatasetReference"
 					},
-					"logStorageSettings": {
-						"linkedServiceName": {
-							"referenceName": "Linkservicegen2",
-							"type": "LinkedServiceReference"
-						}
-					},
-					"enableLogging": true,
+					"enableLogging": false,
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
 						"recursive": true,
