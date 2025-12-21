@@ -100,7 +100,8 @@
 					"message": {
 						"value": "@activity('Web1').output",
 						"type": "Expression"
-					}
+					},
+					"errorCode": "2200"
 				}
 			},
 			{
