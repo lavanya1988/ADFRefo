@@ -63,7 +63,8 @@
 					{
 						"activity": "Wait1",
 						"dependencyConditions": [
-							"Failed"
+							"Failed",
+							"Skipped"
 						]
 					}
 				],
