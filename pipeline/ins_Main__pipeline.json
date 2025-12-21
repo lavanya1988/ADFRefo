@@ -59,14 +59,11 @@
 			{
 				"name": "Web1",
 				"type": "WebActivity",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Failed",
 				"dependsOn": [
 					{
 						"activity": "Wait1",
 						"dependencyConditions": [
 							"Succeeded",
-							"Completed",
 							"Skipped"
 						]
 					}
