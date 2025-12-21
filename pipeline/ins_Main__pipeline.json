@@ -128,7 +128,7 @@
 						"referenceName": "ADLS_DataSet",
 						"type": "DatasetReference",
 						"parameters": {
-							"Filesystem": "ar"
+							"Filesystem": "archive"
 						}
 					},
 					"enableLogging": true,
