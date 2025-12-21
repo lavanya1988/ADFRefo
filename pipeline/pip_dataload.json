@@ -180,7 +180,7 @@
 				}
 			},
 			{
-				"name": "Web1",
+				"name": "SendFailureEmails",
 				"type": "WebActivity",
 				"dependsOn": [],
 				"policy": {
