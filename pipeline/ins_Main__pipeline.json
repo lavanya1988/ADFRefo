@@ -137,6 +137,10 @@
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
 						"recursive": true,
+						"modifiedDatetimeEnd": {
+							"value": "@adddays(utcNow(),-31)",
+							"type": "Expression"
+						},
 						"enablePartitionDiscovery": false
 					}
 				}
