@@ -92,7 +92,7 @@
 					{
 						"activity": "Web1",
 						"dependencyConditions": [
-							"Failed"
+							"Succeeded"
 						]
 					}
 				],
