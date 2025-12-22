@@ -260,6 +260,7 @@
 									"referenceName": "ADLS_DataSet",
 									"type": "DatasetReference",
 									"parameters": {
+										"Filesystem": "archive",
 										"Directory": "Output/SQLServer",
 										"Filename": " "
 									}
@@ -268,6 +269,7 @@
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
 									"recursive": true,
+									"wildcardFileName": "*.csv",
 									"enablePartitionDiscovery": false
 								}
 							}
