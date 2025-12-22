@@ -246,7 +246,8 @@
 					{
 						"activity": "ForEach1",
 						"dependencyConditions": [
-							"Failed"
+							"Failed",
+							"Skipped"
 						]
 					}
 				],
@@ -257,7 +258,11 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "https://prod-47.eastus.logic.azure.com:443/workflows/3cd85e0ed35e4cb6ae332c0f733ccf67/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=gj6XR50xsDsD0eSW1CdgQ9Ve6IhYmBtnIUuH9KQz0Wk"
+				}
 			}
 		],
 		"folder": {
