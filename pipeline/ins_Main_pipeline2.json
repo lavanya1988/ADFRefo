@@ -107,8 +107,6 @@
 			{
 				"name": "Delete1",
 				"type": "Delete",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Wait1",
@@ -135,10 +133,15 @@
 							"Filename": " "
 						}
 					},
-					"enableLogging": true,
+					"enableLogging": false,
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
 						"recursive": true,
+						"modifiedDatetimeEnd": {
+							"value": "@adddays(utcNow(),-31)",
+							"type": "Expression"
+						},
+						"wildcardFileName": "*.csv",
 						"enablePartitionDiscovery": false
 					}
 				}
