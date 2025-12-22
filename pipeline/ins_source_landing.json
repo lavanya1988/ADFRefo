@@ -260,7 +260,7 @@
 									"referenceName": "ADLS_DataSet",
 									"type": "DatasetReference",
 									"parameters": {
-										"Directory": "archive",
+										"Directory": "Output/SQLServer",
 										"Filename": " "
 									}
 								},
