@@ -129,6 +129,22 @@
 								},
 								"waitOnCompletion": true
 							}
+						},
+						{
+							"name": "Execute Pipeline1_copy3",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"policy": {
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "p_process_file",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true
+							}
 						}
 					]
 				}
